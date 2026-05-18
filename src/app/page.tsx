@@ -1,6 +1,7 @@
 "use client";
 
 import { Hero } from "@/components/features/landing/Hero";
+import { TrustSection } from "@/components/features/landing/TrustSection";
 import { CategoryGrid } from "@/components/features/landing/CategoryGrid";
 import { FeaturedServices } from "@/components/features/landing/FeaturedServices";
 import { HowItWorks } from "@/components/features/landing/HowItWorks";
@@ -22,6 +23,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Hero />
+      <TrustSection />
       <CategoryGrid />
       <WhyChooseUs />
       <FeaturedServices />

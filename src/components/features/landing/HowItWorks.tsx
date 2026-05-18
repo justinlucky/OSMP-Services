@@ -1,46 +1,80 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { steps } from "@/data/landing";
 
 export const HowItWorks = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section className="py-24 md:py-32 bg-white dark:bg-slate-950">
-      <div className="container mx-auto px-4 text-center">
-        <div className="mx-auto max-w-3xl space-y-4 mb-20">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight">How OSM Services Works</h2>
-          <p className="text-muted-foreground text-lg">Booking a professional service has never been easier. Just 3 simple steps.</p>
+    <section ref={containerRef} className="py-32 bg-background relative overflow-hidden border-y border-white/5">
+      <div className="absolute inset-0 aurora-bg opacity-30" />
+      
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="max-w-3xl mb-24">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-primary uppercase tracking-widest mb-6">
+            Intelligent Workflow
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white mb-6">
+            Automated from <br/> Request to Resolution.
+          </h2>
+          <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+            Our platform orchestrates the entire lifecycle of your service request, eliminating friction and ensuring world-class delivery.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 relative lg:px-20">
-          {/* Connector Line (Desktop) */}
-          <div className="hidden md:block absolute top-[2.5rem] left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-transparent via-slate-200 to-transparent dark:via-slate-800" />
-          
-          {steps.map((step, index) => (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="relative group"
-            >
-              <div className="relative mb-8">
-                <div className={`mx-auto flex h-24 w-24 items-center justify-center rounded-[2.5rem] ${step.color} shadow-2xl shadow-primary/20 text-white transform group-hover:rotate-6 transition-all duration-500 relative z-10`}>
-                  <step.icon className="h-10 w-10" />
-                </div>
-                <div className="absolute -right-2 top-0 flex h-10 w-10 items-center justify-center rounded-2xl bg-white border-2 border-slate-50 text-sm font-black text-slate-900 shadow-xl z-20 dark:bg-slate-900 dark:border-slate-800 dark:text-white">
-                  0{index + 1}
-                </div>
-              </div>
-              <div className="space-y-3">
-                <h3 className="text-2xl font-bold tracking-tight">{step.title}</h3>
-                <p className="text-muted-foreground leading-relaxed px-4">
-                  {step.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+        <div className="relative max-w-5xl mx-auto pl-4 md:pl-0">
+          {/* Animated Connecting Line */}
+          <div className="absolute left-[23px] md:left-1/2 top-0 bottom-0 w-px bg-white/5 md:-translate-x-1/2">
+            <motion.div 
+              className="absolute top-0 left-0 w-full bg-gradient-to-b from-primary via-blue-500 to-purple-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+              style={{ height: lineHeight }}
+            />
+          </div>
+
+          <div className="space-y-24">
+            {steps.map((step, index) => {
+              const isEven = index % 2 === 0;
+              return (
+                <motion.div
+                  key={step.title}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className={`relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-16 ${isEven ? "md:flex-row" : "md:flex-row-reverse"}`}
+                >
+                  {/* Timeline Node */}
+                  <div className="absolute left-0 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full border-4 border-background bg-slate-900 flex items-center justify-center z-10 shadow-xl ring-1 ring-white/20">
+                    <span className="text-sm font-bold text-white">{index + 1}</span>
+                  </div>
+
+                  {/* Content Card */}
+                  <div className={`w-full md:w-1/2 ${isEven ? "md:pr-12 md:text-right" : "md:pl-12 md:text-left"} pl-12 md:pl-0`}>
+                    <div className="glass-dark p-8 rounded-3xl group hover:border-white/20 transition-all duration-300 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-white/5 border border-white/10 mb-6 shadow-inner text-white group-hover:scale-110 group-hover:bg-primary/20 group-hover:border-primary/30 group-hover:text-primary transition-all duration-500 ${isEven ? "md:ml-auto" : "md:mr-auto"}`}>
+                        <step.icon className="h-8 w-8" />
+                      </div>
+                      
+                      <h3 className="text-2xl font-bold tracking-tight text-white mb-4">{step.title}</h3>
+                      <p className="text-slate-400 leading-relaxed text-lg">
+                        {step.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Search, MapPin, User, ShoppingCart, Menu } from "lucide-react";
+import { Search, MapPin, User, ShoppingCart, Menu, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -64,6 +64,15 @@ export const Navbar = () => {
           <div className="hidden items-center gap-6 md:flex mr-4">
             <Link href="/services" className="text-sm font-semibold hover:text-primary transition-colors relative group">
               Services
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            </Link>
+            <Link href="/wizard" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors relative group flex items-center gap-1">
+              <Sparkles className="h-4 w-4" />
+              AI Wizard
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
+            </Link>
+            <Link href="/calculator" className="text-sm font-semibold hover:text-primary transition-colors relative group">
+              Calculator
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
             </Link>
             <Link href="/pricing" className="text-sm font-semibold hover:text-primary transition-colors relative group">

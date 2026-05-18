@@ -1,73 +1,127 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { benefits } from "@/data/landing";
+import { ShieldCheck, Zap, Activity, Lock } from "lucide-react";
 
 export const WhyChooseUs = () => {
+  const features = [
+    {
+      icon: Zap,
+      title: "Real-time AI Matching",
+      description: "Our proprietary algorithm analyzes 50+ data points to connect you with the perfect professional in milliseconds."
+    },
+    {
+      icon: ShieldCheck,
+      title: "Enterprise-grade Vetting",
+      description: "Only the top 1% of applicants pass our rigorous 5-stage background check and technical evaluation process."
+    },
+    {
+      icon: Activity,
+      title: "Predictive Maintenance",
+      description: "For corporate clients, our system predicts when infrastructure needs servicing before failures occur."
+    },
+    {
+      icon: Lock,
+      title: "Bank-level Security",
+      description: "All communications, data, and payments are secured with AES-256 encryption. Your privacy is guaranteed."
+    }
+  ];
+
   return (
-    <section className="py-24 bg-white dark:bg-slate-950">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <div className="flex-1 space-y-8">
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight leading-tight">
-                Why Thousands Trust <br />
-                <span className="text-primary italic">OSM Services</span> for Home Services
+    <section className="py-32 bg-background relative overflow-hidden border-y border-white/5">
+      {/* Background Gradients */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3" />
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+          <div className="flex-1 space-y-10">
+            <div className="space-y-6">
+               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-primary uppercase tracking-widest">
+                Platform Architecture
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white leading-[1.1]">
+                Built for Scale. <br />
+                <span className="text-slate-500">Engineered for Precision.</span>
               </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                We&apos;ve spent years refining our process to ensure you get the most reliable, 
-                high-quality service at prices that make sense.
+              <p className="text-slate-400 text-lg leading-relaxed max-w-xl">
+                We don't just connect you with service providers. We provide an intelligent layer of quality control, security, and automation that legacy platforms cannot match.
               </p>
             </div>
 
-            <div className="grid gap-8">
-              {benefits.map((benefit, index) => (
+            <div className="grid sm:grid-cols-2 gap-8">
+              {features.map((feature, index) => (
                 <motion.div 
-                  key={benefit.title}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex gap-6 group"
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  className="space-y-4"
                 >
-                  <div className={`flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl ${benefit.bg} ${benefit.color} transition-transform group-hover:scale-110 shadow-sm`}>
-                    <benefit.icon className="h-8 w-8" />
+                  <div className="h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-primary shadow-inner">
+                    <feature.icon className="h-6 w-6" />
                   </div>
-                  <div className="space-y-1">
-                    <h3 className="text-xl font-bold tracking-tight">{benefit.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-bold text-white tracking-tight">{feature.title}</h3>
+                  <p className="text-slate-500 leading-relaxed text-sm">
+                    {feature.description}
+                  </p>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="flex-1 relative">
-            <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl border-8 border-slate-50 dark:border-slate-800">
-               <img 
-                 src="/why-us.jpg" 
-                 alt="Professional Service" 
-                 className="w-full h-auto aspect-[4/5] object-cover"
-               />
-               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-               <div className="absolute bottom-10 left-10 right-10 p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 text-white">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="h-12 w-12 rounded-full border-2 border-primary overflow-hidden relative">
-                       <img src="/avatars/user-1.jpg" alt="Technician" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <p className="font-bold">Arjun Kumar</p>
-                      <p className="text-xs opacity-70 font-medium">Expert Technician • 4.9 Rating</p>
-                    </div>
+          <div className="flex-1 w-full relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative z-10 rounded-[2.5rem] overflow-hidden glass-panel border border-white/10 p-2"
+            >
+               {/* Abstract Data Visualization UI Mockup */}
+               <div className="rounded-[2rem] bg-slate-950/80 w-full aspect-square md:aspect-[4/5] relative overflow-hidden flex flex-col justify-between p-8 border border-white/5">
+                  {/* Grid overlay */}
+                  <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:30px_30px]" />
+                  
+                  <div className="relative z-10 flex justify-between items-start">
+                     <div className="space-y-2">
+                        <p className="text-xs font-mono text-primary uppercase tracking-wider">Live System Status</p>
+                        <p className="text-3xl font-light text-white tracking-tighter">99.999% <span className="text-sm text-slate-500">Uptime</span></p>
+                     </div>
+                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        Operational
+                     </div>
                   </div>
-                  <p className="text-sm italic font-medium">&quot;I take pride in my work. OSM Services ensures we have the best tools and support to deliver excellence.&quot;</p>
+
+                  <div className="relative z-10 space-y-4">
+                     <div className="h-24 w-full rounded-2xl bg-white/5 border border-white/5 flex items-end p-4 gap-2">
+                        {[40, 70, 45, 90, 65, 85, 100, 60, 80, 50].map((h, i) => (
+                           <motion.div 
+                             key={i}
+                             initial={{ height: 0 }}
+                             whileInView={{ height: `${h}%` }}
+                             viewport={{ once: true }}
+                             transition={{ delay: 0.5 + (i * 0.05), duration: 1 }}
+                             className="flex-1 bg-primary/40 rounded-t-sm"
+                           />
+                        ))}
+                     </div>
+                     
+                     <div className="grid grid-cols-2 gap-4">
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-md">
+                           <p className="text-xs text-slate-500 mb-1">Active Nodes</p>
+                           <p className="text-xl font-bold text-white">4,281</p>
+                        </div>
+                        <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-md">
+                           <p className="text-xs text-slate-500 mb-1">Matching Latency</p>
+                           <p className="text-xl font-bold text-white">12ms</p>
+                        </div>
+                     </div>
+                  </div>
                </div>
-            </div>
-            {/* Decorative element */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl -z-10 animate-pulse" />
-            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-purple-500/20 rounded-full blur-3xl -z-10" />
+            </motion.div>
           </div>
         </div>
       </div>
