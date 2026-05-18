@@ -36,12 +36,12 @@ export const Hero = () => {
           </div>
 
           {/* Main Headline */}
-          <div className="space-y-6">
-            <h1 className="text-5xl sm:text-7xl lg:text-[6.5rem] font-bold tracking-tighter leading-[1.05] text-white">
+          <div className="space-y-6 text-center w-full px-2">
+            <h1 className="text-4xl sm:text-6xl lg:text-[6.5rem] font-bold tracking-tighter leading-[1.1] text-white break-words">
               Intelligent Services, <br className="hidden sm:block" />
-              <span className="text-gradient">Delivered Instantly.</span>
+              <span className="text-gradient text-slate-100">Delivered Instantly.</span>
             </h1>
-            <p className="mx-auto max-w-2xl text-xl text-slate-400 font-medium leading-relaxed">
+            <p className="mx-auto max-w-2xl text-lg sm:text-xl text-slate-200 font-medium leading-relaxed px-4">
               Experience the world's most advanced service platform. AI-driven matching, real-time tracking, and enterprise-grade reliability for your business and home.
             </p>
           </div>
@@ -49,16 +49,16 @@ export const Hero = () => {
           {/* AI Command Palette Prompt */}
           <div className="w-full max-w-2xl mt-12 mb-8 group">
             <div className="relative flex items-center w-full h-16 sm:h-20 bg-black/40 backdrop-blur-2xl border border-white/10 hover:border-white/20 rounded-2xl sm:rounded-full shadow-2xl transition-all overflow-hidden focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary/50">
-              <div className="pl-6 pr-4 text-slate-400 flex items-center justify-center">
+              <div className="pl-6 pr-4 text-slate-200 flex items-center justify-center">
                 <Bot className="h-6 w-6 sm:h-8 sm:w-8 text-primary animate-pulse" />
               </div>
               <input 
                 type="text" 
                 placeholder="Ask AI: 'I need an IT audit for my startup...'" 
-                className="flex-1 h-full bg-transparent text-white text-base sm:text-lg font-medium outline-none placeholder:text-slate-500"
+                className="flex-1 h-full bg-transparent text-white text-base sm:text-lg font-medium outline-none placeholder:text-slate-300"
               />
               <div className="pr-2 sm:pr-4 flex items-center gap-2">
-                <div className="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-400">
+                <div className="hidden sm:flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-slate-200">
                   <Command className="h-3 w-3" /> K
                 </div>
                 <Button className="h-10 sm:h-12 px-6 sm:px-8 rounded-xl sm:rounded-full bg-primary hover:bg-primary/90 text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all">
@@ -69,7 +69,7 @@ export const Hero = () => {
             
             <div className="flex flex-wrap justify-center gap-3 mt-6">
               {["Corporate Cleaning", "IT Infrastructure", "Security Audit", "Office Setup"].map((suggestion) => (
-                <div key={suggestion} className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-sm text-slate-400 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">
+                <div key={suggestion} className="px-4 py-2 rounded-full bg-white/5 border border-white/5 text-sm text-slate-200 hover:bg-white/10 hover:text-white transition-colors cursor-pointer">
                   {suggestion}
                 </div>
               ))}
@@ -90,13 +90,13 @@ export const Hero = () => {
                     <Sparkles key={star} className="h-4 w-4 fill-primary text-primary" />
                   ))}
                 </div>
-                <span className="text-xs font-medium text-slate-400">Trusted by 10k+ companies</span>
+                <span className="text-xs font-medium text-slate-200">Trusted by 10k+ companies</span>
               </div>
             </div>
             
             <div className="hidden sm:block w-px h-8 bg-white/10" />
             
-            <div className="flex items-center gap-4 text-slate-400 font-medium text-sm">
+            <div className="flex items-center gap-4 text-slate-200 font-medium text-sm">
               <span className="flex items-center gap-2"><ArrowRight className="h-4 w-4 text-primary" /> 99.9% Uptime</span>
               <span className="flex items-center gap-2"><ArrowRight className="h-4 w-4 text-primary" /> 24/7 AI Support</span>
             </div>
