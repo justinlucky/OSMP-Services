@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Zap, Activity, Lock } from "lucide-react";
+import { ShieldCheck, Zap, Activity, Lock, Sparkles } from "lucide-react";
 
 export const WhyChooseUs = () => {
   const features = [
@@ -93,6 +93,69 @@ export const WhyChooseUs = () => {
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         Operational
                      </div>
+                  </div>
+
+                  {/* Room Cleaning AI Animation */}
+                  <div className="flex-1 w-full relative flex items-center justify-center my-6 z-10">
+                    <div className="relative w-full max-w-[320px] aspect-[4/3] bg-black/40 rounded-2xl border border-white/10 overflow-hidden flex items-center p-3 shadow-2xl">
+                      {/* Grid */}
+                      <div className="grid grid-cols-4 gap-2 w-full h-full relative z-10">
+                        {Array.from({ length: 12 }).map((_, i) => (
+                          <div key={i} className="bg-white/5 rounded-xl border border-white/5 relative overflow-hidden flex items-center justify-center">
+                             {/* Dust particles */}
+                             <motion.div 
+                               className="w-1.5 h-1.5 rounded-full bg-slate-500/50"
+                               animate={{ 
+                                 opacity: [1, 1, 0, 0, 1],
+                                 scale: [1, 1, 0, 0, 1]
+                               }}
+                               transition={{ 
+                                 duration: 6,
+                                 times: [0, (i % 4) * 0.15, (i % 4) * 0.15 + 0.1, 0.9, 1],
+                                 repeat: Infinity,
+                                 ease: "easeInOut"
+                               }}
+                             />
+                             {/* Clean effect flash */}
+                             <motion.div 
+                               className="absolute inset-0 bg-primary/20"
+                               animate={{ opacity: [0, 0.8, 0, 0, 0] }}
+                               transition={{ 
+                                 duration: 6,
+                                 times: [0, (i % 4) * 0.15, (i % 4) * 0.15 + 0.1, 0.9, 1],
+                                 repeat: Infinity,
+                                 ease: "easeInOut"
+                               }}
+                             />
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* AI Cleaning Drone */}
+                      <motion.div 
+                        className="absolute z-20 w-10 h-10 bg-primary/20 backdrop-blur-md border border-primary rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                        animate={{ 
+                          x: ["-120px", "0px", "120px", "120px", "0px", "-120px", "-120px"],
+                          y: ["-45px", "-45px", "-45px", "45px", "45px", "45px", "-45px"]
+                        }}
+                        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+                      >
+                        <Sparkles className="w-5 h-5 text-primary" />
+                      </motion.div>
+
+                      {/* Scanner Line */}
+                      <motion.div 
+                        className="absolute inset-x-0 h-40 bg-gradient-to-b from-primary/0 via-primary/5 to-primary/20 border-b border-primary/50 z-30"
+                        animate={{ y: ["-100%", "200%"] }}
+                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                      />
+
+                      {/* Overlay Badge */}
+                      <div className="absolute top-3 left-3 z-40 bg-black/80 backdrop-blur-md border border-white/10 rounded flex items-center gap-2 px-2.5 py-1.5">
+                        <span className="flex h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                        <span className="text-[10px] uppercase tracking-wider text-slate-300 font-mono">Smart Cleaning Mapping</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="relative z-10 space-y-4">
