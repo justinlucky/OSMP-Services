@@ -198,7 +198,7 @@ export function FloatingChatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 pointer-events-auto select-none font-sans">
+    <div className="fixed bottom-24 md:bottom-6 right-6 z-50 pointer-events-auto select-none font-sans">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center justify-center h-14 w-14 rounded-full bg-primary hover:bg-primary/90 shadow-[0_0_20px_rgba(var(--primary),0.5)] transition-all duration-300 hover:scale-105"

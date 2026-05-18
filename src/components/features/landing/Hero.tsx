@@ -37,7 +37,7 @@ export const Hero = () => {
 
           {/* Main Headline */}
           <div className="space-y-6">
-            <h1 className="text-6xl sm:text-7xl lg:text-[6.5rem] font-bold tracking-tighter leading-[1.05] text-white">
+            <h1 className="text-5xl sm:text-7xl lg:text-[6.5rem] font-bold tracking-tighter leading-[1.05] text-white">
               Intelligent Services, <br className="hidden sm:block" />
               <span className="text-gradient">Delivered Instantly.</span>
             </h1>

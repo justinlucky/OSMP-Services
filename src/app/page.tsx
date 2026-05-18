@@ -36,16 +36,16 @@ export default function Home() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8 }}
-        className="py-24 bg-primary text-white overflow-hidden relative"
+        className="py-24 bg-primary text-primary-foreground overflow-hidden relative"
       >
         {/* Background Accents */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-black/10 rounded-full blur-[80px] -translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-black/5 rounded-full blur-[100px] translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-black/5 rounded-full blur-[80px] -translate-x-1/2 translate-y-1/2" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:px-12">
             <div className="space-y-8 max-w-2xl text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-bold tracking-tight">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 backdrop-blur-md border border-black/10 text-sm font-bold tracking-tight">
                 <Smartphone className="h-4 w-4" />
                 <span>Next-Gen Mobile App</span>
               </div>
@@ -55,27 +55,27 @@ export default function Home() {
                 Right in Your Pocket
               </h2>
               
-              <p className="text-white/80 text-xl leading-relaxed max-w-xl mx-auto lg:mx-0">
+              <p className="text-primary-foreground/70 text-xl leading-relaxed max-w-xl mx-auto lg:mx-0">
                 Book services in seconds, track your professional in real-time, and manage everything from a single intuitive interface.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-4">
-                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-3xl border border-white/10">
-                    <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center relative overflow-hidden">
+                <div className="flex items-center gap-4 bg-black/5 p-4 rounded-3xl border border-black/10">
+                    <div className="h-12 w-12 rounded-2xl bg-black/5 flex items-center justify-center relative overflow-hidden">
                         <Image src="/app-icon.png" alt="OSM Services Icon" fill className="object-cover p-1" />
                     </div>
                     <div className="text-left">
                         <p className="font-bold">Exclusive Deals</p>
-                        <p className="text-xs text-white/60">App-only discounts & offers</p>
+                        <p className="text-xs text-primary-foreground/60">App-only discounts & offers</p>
                     </div>
                 </div>
-                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-3xl border border-white/10">
-                    <div className="h-12 w-12 rounded-2xl bg-white/10 flex items-center justify-center relative overflow-hidden">
+                <div className="flex items-center gap-4 bg-black/5 p-4 rounded-3xl border border-black/10">
+                    <div className="h-12 w-12 rounded-2xl bg-black/5 flex items-center justify-center relative overflow-hidden">
                         <Smartphone className="h-6 w-6" />
                     </div>
                     <div className="text-left">
                         <p className="font-bold">Secure Payments</p>
-                        <p className="text-xs text-white/60">One-tap UPI & Card payments</p>
+                        <p className="text-xs text-primary-foreground/60">One-tap UPI & Card payments</p>
                     </div>
                 </div>
               </div>
