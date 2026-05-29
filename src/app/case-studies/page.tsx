@@ -56,7 +56,7 @@ export default function CaseStudiesPage() {
             <span className="text-slate-500">Infrastructure.</span>
           </h1>
           <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Discover how industry leaders leverage OSM's intelligent routing and predictive maintenance to scale operations and reduce overhead.
+            Discover how industry leaders leverage {"OSM's"} intelligent routing and predictive maintenance to scale operations and reduce overhead.
           </p>
         </div>
 

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Service Price Calculator</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f2faf9;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+        /* Custom scrollbar for summary items list */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 bg-[#f2faf9] transition-all duration-300 antialiased selection:bg-teal-500 selection:text-white relative select-none">
+
+    <!-- Ambient Glowing Accents -->
+    <div class="absolute top-0 right-0 w-[45rem] h-[30rem] bg-gradient-to-b from-teal-200/40 via-emerald-100/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-gradient-to-t from-teal-200/40 via-emerald-100/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Header -->
+        <header class="text-center mb-12 max-w-3xl mx-auto">
+            <span class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-250 text-xs font-semibold text-teal-700 uppercase tracking-wider mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a1.125 1.125 0 0 0 1.59 0l7.26-7.26a1.125 1.125 0 0 0 0-1.59L12.5 3.659A2.25 2.25 0 0 0 10.909 3H9.568Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 7.5h.008v.008H6V7.5Z" />
+                </svg>
+                Limited Time Bundle Deal
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4 leading-tight">
+                Service Price <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600 font-extrabold">Calculator</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
+                Choose multiple services for your home or office. <span class="text-teal-750 bg-teal-50/80 border border-teal-100 px-2 py-0.5 rounded-md">Save 15% instantly</span> when you select <span class="font-bold text-teal-800">4 or more</span> services!
+            </p>
+        </header>
+
+        <!-- Main Layout Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            
+            <!-- Left Side: Service Grid -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Toolbar -->
+                <div class="flex items-center justify-between bg-white border border-teal-100/95 p-4 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-semibold text-slate-700">Available Services:</span>
+                        <span id="service-count-badge" class="px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-100 text-xs font-bold text-teal-700">10 Total</span>
+                    </div>
+                    <button id="btn-clear-top" onclick="clearAllSelections()" class="text-sm font-semibold text-teal-700 hover:text-red-700 hover:bg-red-50/50 px-3 py-1.5 rounded-xl transition-all duration-200 flex items-center gap-1.5 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                        </svg>
+                        Clear All
+                    </button>
+                </div>
+
+                <!-- Services Container -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="services-grid">
+                    <!-- Cards will be dynamically rendered here for better maintainability -->
+                </div>
+            </div>
+
+            <!-- Right Side: Sticky Calculator Panel -->
+            <div class="lg:col-span-1 lg:sticky lg:top-8">
+                <div class="bg-white rounded-3xl border border-teal-100/90 shadow-xl p-6 overflow-hidden relative">
+                    <!-- Visual glow inside summary card -->
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-teal-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                        </svg>
+                        Booking Summary
+                    </h2>
+
+                    <!-- Live selected services list -->
+                    <div class="space-y-3 mb-6 max-h-48 overflow-y-auto pr-1 custom-scrollbar" id="summary-items">
+                        <!-- Items rendered dynamically -->
+                        <div class="text-center py-6 text-slate-600 text-sm italic">
+                            No services selected. Click cards on the left to start customizing.
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar for Discount -->
+                    <div class="bg-teal-50/30 border border-teal-100 rounded-2xl p-4 mb-6 transition-all duration-300" id="progress-container">
+                        <div class="flex justify-between text-xs font-semibold text-slate-700 mb-2">
+                            <span id="progress-text">Add 4 services for 15% off!</span>
+                            <span id="progress-count" class="font-mono text-teal-600 font-extrabold">0/4</span>
+                        </div>
+                        <div class="w-full bg-teal-100 h-2.5 rounded-full overflow-hidden">
+                            <div id="progress-bar" class="bg-gradient-to-r from-teal-500 to-emerald-500 h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice-like Pricing Breakdown -->
+                    <div class="border-t border-teal-50 pt-6 space-y-4">
+                        <div class="flex justify-between text-sm font-medium text-slate-600">
+                            <span>Subtotal</span>
+                            <span id="pricing-subtotal" class="font-semibold text-slate-900">₹0</span>
+                        </div>
+                        
+                        <!-- Discount row -->
+                        <div class="flex justify-between text-sm font-medium transition-all duration-300" id="pricing-discount-row">
+                            <span id="discount-label" class="text-slate-500">Discount (15%)</span>
+                            <span id="pricing-discount" class="font-bold text-slate-600">No discount</span>
+                        </div>
+
+                        <!-- Highlighted Savings message -->
+                        <div id="savings-badge" class="hidden bg-emerald-50 border border-emerald-100 rounded-xl p-3 text-emerald-700 text-xs font-bold text-center">
+                            🎉 Awesome! You saved <span id="savings-amount">₹0</span> with this bundle!
+                        </div>
+
+                        <div class="border-t border-teal-50 pt-4 flex justify-between items-end">
+                            <div>
+                                <span class="text-sm font-bold text-slate-800">Total Price</span>
+                                <p class="text-[10px] text-slate-600 uppercase tracking-widest font-bold">Inclusive of taxes</p>
+                            </div>
+                            <div class="text-right">
+                                <span id="pricing-old-total" class="hidden text-sm line-through text-slate-600/80 mr-2 font-semibold">₹0</span>
+                                <span id="pricing-total" class="text-3xl font-black text-teal-700 font-display">₹0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="mt-8 space-y-3">
+                        <button id="btn-book" onclick="triggerBooking()" class="w-full h-14 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-teal-500/10 active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2 text-base cursor-pointer">
+                            <i class="fa-solid fa-calendar-check text-base"></i>
+                            Confirm Booking
+                        </button>
+                        
+                        <button onclick="clearAllSelections()" class="w-full py-3 text-teal-700 hover:text-teal-900 hover:bg-teal-50/50 border border-transparent hover:border-teal-100 font-semibold rounded-2xl text-sm transition-all duration-200 cursor-pointer">
+                            Clear Selections
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Booking Confirmation Modal -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-teal-950/40 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-[2.5rem] border border-teal-100/90 shadow-2xl p-8 max-w-md w-full relative transform scale-95 transition-transform duration-300">
+            <!-- Close button -->
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 rounded-full text-teal-600 hover:text-teal-800 hover:bg-teal-50 transition-colors cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <!-- Success Checkmark -->
+            <div class="h-16 w-16 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 mb-6 mx-auto shadow-inner">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+            </div>
+
+            <h3 class="text-2xl font-black text-slate-900 text-center mb-2">Booking Confirmed!</h3>
+            <p class="text-sm text-slate-600 text-center mb-6 leading-relaxed">
+                Your request has been registered in the system. A technician is being assigned to your location.
+            </p>
+
+            <!-- Receipt Card inside modal -->
+            <div class="bg-teal-50/50 border border-teal-100 rounded-2xl p-5 mb-6 font-medium text-slate-800 text-sm space-y-3">
+                <div class="flex justify-between"><span>Selected Services:</span> <strong id="modal-service-count" class="text-teal-950">0</strong></div>
+                <div class="flex justify-between"><span>Subtotal:</span> <strong id="modal-subtotal" class="text-teal-950">₹0</strong></div>
+                <div id="modal-discount-row" class="flex justify-between text-emerald-700 font-semibold"><span>Discount Applied:</span> <strong id="modal-discount">-₹0</strong></div>
+                <div class="flex justify-between text-base font-bold text-teal-950 pt-3 border-t border-teal-100"><span>Amount Paid:</span> <span id="modal-total" class="text-teal-700 font-display">₹0</span></div>
+            </div>
+
+            <button onclick="closeModal()" class="w-full py-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold rounded-2xl transition-all duration-200 shadow-lg cursor-pointer">
+                Awesome, Thank You!
+            </button>
+        </div>
+    </div>
+
+    <!-- Script Block containing logical implementation -->
+    <script>
+        // List of realistic home services and dynamic icons
+        const servicesList = [
+            {
+                id: "room-clean",
+                name: "Room Cleaning",
+                price: 500,
+                category: "Cleaning",
+                desc: "Thorough vacuuming, sanitizing, and dusting of all major surfaces.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>`
+            },
+            {
+                id: "ac-repair",
+                name: "AC Repair & Servicing",
+                price: 1200,
+                category: "Repairs",
+                desc: "Filter cleanup, gas pressure audit, cooling efficiency checkup.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.14 10.46a3 3 0 00-4.3-4.24l-5.1 5.1a3 3 0 004.24 4.3l5.1-5.16zm-9.73 3.03v.01m-2.12-.01v.01M5.12 13.5v.01M3 13.5v.01"/></svg>`
+            },
+            {
+                id: "washroom-clean",
+                name: "Washroom Cleaning",
+                price: 300,
+                category: "Cleaning",
+                desc: "Deep scrub tile descaling, toilet sanitation, and mirror polishing.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>`
+            },
+            {
+                id: "kitchen-clean",
+                name: "Kitchen Deep Clean",
+                price: 400,
+                category: "Cleaning",
+                desc: "Grease removal from stove, exhaust fan cleaning, and slab wash.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`
+            },
+            {
+                id: "plumbing-fix",
+                name: "Plumbing Fix",
+                price: 800,
+                category: "Repairs",
+                desc: "Leak repairs, blockage cleaning, tap replacement by certified professionals.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`
+            },
+            {
+                id: "electrical-repair",
+                name: "Electrical Repair",
+                price: 900,
+                category: "Repairs",
+                desc: "Fix short circuits, switchboard changes, and high voltage load test.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`
+            },
+            {
+                id: "paint-touchup",
+                name: "Paint Touch‑up",
+                price: 1500,
+                category: "Renovations",
+                desc: "Wall putty treatment, damp coverage, high-finish acrylic coating.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>`
+            },
+            {
+                id: "furniture-assembly",
+                name: "Furniture Assembly",
+                price: 600,
+                category: "General",
+                desc: "Assemble cupboards, tables, beds with clean precision alignments.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>`
+            },
+            {
+                id: "pest-control",
+                name: "Intense Pest Control",
+                price: 1100,
+                category: "Sanitation",
+                desc: "Herbal spray and gel treatment against termites, cockroaches, and ants.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>`
+            },
+            {
+                id: "appliance-repair",
+                name: "Appliance Repair",
+                price: 950,
+                category: "Repairs",
+                desc: "Diagnose and repair washing machines, microwaves, or refrigerators.",
+                icon: `<svg class="w-6 h-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zM12 21a9 9 0 100-18 9 9 0 000 18z"/></svg>`
+            }
+        ];
+
+        // Track selected items
+        let selectedIds = new Set();
+
+        // Initialize view rendering
+        document.addEventListener("DOMContentLoaded", () => {
+            renderServices();
+            updateCalculations();
+        });
+
+        // Render Service Cards in Grid
+        function renderServices() {
+            const grid = document.getElementById("services-grid");
+            grid.innerHTML = "";
+
+            servicesList.forEach(service => {
+                const isSelected = selectedIds.has(service.id);
+                const card = document.createElement("div");
+                card.id = `card-${service.id}`;
+                card.className = `group bg-white border ${isSelected ? 'border-teal-500 ring-2 ring-teal-500/20' : 'border-teal-100/90'} rounded-3xl p-5 hover:border-teal-300 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 cursor-pointer flex flex-col justify-between`;
+                card.onclick = () => toggleService(service.id);
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Header with Category and Icon -->
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-2.5 py-1 rounded-xl bg-teal-50 border border-teal-100 text-[10px] font-bold text-teal-700 uppercase tracking-wider">
+                                ${service.category}
+                            </span>
+                            <div class="h-10 w-10 rounded-xl bg-teal-50/50 border border-teal-100/40 group-hover:bg-teal-50 transition-colors flex items-center justify-center">
+                                ${service.icon}
+                            </div>
+                        </div>
+
+                        <!-- Name and Description -->
+                        <h3 class="text-base font-bold text-teal-950 mb-1 group-hover:text-teal-750 transition-colors">
+                            ${service.name}
+                        </h3>
+                        <p class="text-xs text-slate-500 leading-relaxed mb-6 font-medium">
+                            ${service.desc}
+                        </p>
+                    </div>
+
+                    <!-- Footer: Price and Selection Toggle -->
+                    <div class="flex items-center justify-between pt-4 border-t border-teal-50">
+                        <div>
+                            <span class="text-[10px] text-slate-450 font-bold uppercase tracking-wider block">Rate</span>
+                            <span class="text-lg font-black text-slate-900 font-display">₹${service.price}</span>
+                        </div>
+
+                        <!-- Custom Toggles -->
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs text-teal-700 font-bold hidden sm:inline select-none">
+                                ${isSelected ? 'Selected' : 'Add'}
+                            </span>
+                            <div class="relative w-6 h-6 rounded-full border-2 ${isSelected ? 'border-teal-500 bg-teal-600 text-white' : 'border-teal-200 bg-teal-50'} transition-all duration-200 flex items-center justify-center shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-3.5 h-3.5 transition-transform duration-300 ${isSelected ? 'scale-100' : 'scale-0'}">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Toggle Selection Handler
+        function toggleService(id) {
+            if (selectedIds.has(id)) {
+                selectedIds.delete(id);
+            } else {
+                selectedIds.add(id);
+            }
+            renderServices();
+            updateCalculations();
+        }
+
+        // Core Calculation Logic
+        function updateCalculations() {
+            const count = selectedIds.size;
+            let subtotal = 0;
+            const selectedItemsContainer = document.getElementById("summary-items");
+            
+            // Build selected list
+            selectedItemsContainer.innerHTML = "";
+
+            if (count === 0) {
+                selectedItemsContainer.innerHTML = `
+                    <div class="text-center py-10 text-slate-600 text-sm italic">
+                        No services selected. Click cards on the left to start customizing.
+                    </div>
+                `;
+            } else {
+                servicesList.forEach(service => {
+                    if (selectedIds.has(service.id)) {
+                        subtotal += service.price;
+                        
+                        // Add selection row to list
+                        const row = document.createElement("div");
+                        row.className = "flex justify-between items-center bg-teal-50/40 border border-teal-100/60 p-3 rounded-xl hover:bg-teal-50 transition-colors animate-fade-in";
+                        row.innerHTML = `
+                            <div class="flex items-center gap-2 max-w-[70%]">
+                                <span class="h-2 w-2 rounded-full bg-teal-500"></span>
+                                <span class="text-xs font-semibold text-teal-950 truncate">${service.name}</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-slate-900">₹${service.price}</span>
+                                <button onclick="event.stopPropagation(); toggleService('${service.id}')" class="text-teal-600 hover:text-red-500 p-0.5 rounded transition-colors duration-150 cursor-pointer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-3.5 h-3.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        `;
+                        selectedItemsContainer.appendChild(row);
+                    }
+                });
+            }
+
+            // Discount parameters
+            const discountApplied = count >= 4;
+            const discountRate = 0.15; // 15%
+            const discountAmount = discountApplied ? Math.round(subtotal * discountRate) : 0;
+            const finalTotal = subtotal - discountAmount;
+
+            // DOM elements updates
+            document.getElementById("pricing-subtotal").innerText = `₹${subtotal}`;
+            
+            // Progress Bar / Discount Target updates
+            const progressContainer = document.getElementById("progress-container");
+            const progressBar = document.getElementById("progress-bar");
+            const progressText = document.getElementById("progress-text");
+            const progressCount = document.getElementById("progress-count");
+
+            const percent = Math.min((count / 4) * 100, 100);
+            progressBar.style.width = `${percent}%`;
+            progressCount.innerText = `${count}/4`;
+
+            if (discountApplied) {
+                progressContainer.className = "bg-emerald-50 border border-emerald-100 rounded-2xl p-4 mb-6 transition-all duration-300";
+                progressBar.className = "bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full transition-all duration-300";
+                progressText.innerHTML = "🎉 <strong>15% Discount unlocked!</strong>";
+                progressCount.className = "font-mono text-emerald-700 font-extrabold";
+                
+                // Show old crossed-out pricing
+                document.getElementById("pricing-old-total").classList.remove("hidden");
+                document.getElementById("pricing-old-total").innerText = `₹${subtotal}`;
+
+                // Update discount values
+                document.getElementById("pricing-discount-row").className = "flex justify-between text-sm font-semibold text-emerald-700 animate-pulse";
+                document.getElementById("pricing-discount").innerText = `-₹${discountAmount}`;
+                
+                // Show savings badge
+                document.getElementById("savings-badge").classList.remove("hidden");
+                document.getElementById("savings-amount").innerText = `₹${discountAmount}`;
+            } else {
+                progressContainer.className = "bg-teal-50/30 border border-teal-100 rounded-2xl p-4 mb-6 transition-all duration-300";
+                progressBar.className = "bg-gradient-to-r from-teal-600 to-emerald-600 h-full rounded-full transition-all duration-300";
+                progressText.innerText = `Add ${4 - count} more service${(4 - count) > 1 ? 's' : ''} to save 15%!`;
+                progressCount.className = "font-mono text-teal-600 font-extrabold";
+
+                // Hide old total
+                document.getElementById("pricing-old-total").classList.add("hidden");
+
+                // Disable discount UI row
+                document.getElementById("pricing-discount-row").className = "flex justify-between text-sm font-medium text-slate-600";
+                document.getElementById("pricing-discount").innerText = "No discount";
+
+                // Hide savings badge
+                document.getElementById("savings-badge").classList.add("hidden");
+            }
+
+            // Update Total to Pay
+            document.getElementById("pricing-total").innerText = `₹${finalTotal}`;
+
+            // Sync booking button state
+            const btnBook = document.getElementById("btn-book");
+            if (count === 0) {
+                btnBook.disabled = true;
+                btnBook.classList.add("opacity-50", "cursor-not-allowed");
+            } else {
+                btnBook.disabled = false;
+                btnBook.classList.remove("opacity-50", "cursor-not-allowed");
+            }
+        }
+
+        // Clear AllSelections Trigger
+        function clearAllSelections() {
+            selectedIds.clear();
+            renderServices();
+            updateCalculations();
+        }
+
+        // Trigger Booking Modal Popup
+        function triggerBooking() {
+            const count = selectedIds.size;
+            if (count === 0) return;
+
+            let subtotal = 0;
+            servicesList.forEach(s => {
+                if (selectedIds.has(s.id)) subtotal += s.price;
+            });
+
+            const discountApplied = count >= 4;
+            const discountAmount = discountApplied ? Math.round(subtotal * 0.15) : 0;
+            const finalTotal = subtotal - discountAmount;
+
+            // Populate Modal values
+            document.getElementById("modal-service-count").innerText = `${count} Service${count > 1 ? 's' : ''}`;
+            document.getElementById("modal-subtotal").innerText = `₹${subtotal}`;
+            
+            const mDiscountRow = document.getElementById("modal-discount-row");
+            if (discountApplied) {
+                mDiscountRow.style.display = "flex";
+                document.getElementById("modal-discount").innerText = `-₹${discountAmount}`;
+            } else {
+                mDiscountRow.style.display = "none";
+            }
+            document.getElementById("modal-total").innerText = `₹${finalTotal}`;
+
+            // Open Modal with clean fades
+            const modal = document.getElementById("booking-modal");
+            modal.classList.remove("hidden");
+            setTimeout(() => {
+                modal.classList.remove("opacity-0");
+                modal.querySelector(".transform").classList.remove("scale-95");
+                modal.querySelector(".transform").classList.add("scale-100");
+            }, 10);
+        }
+
+        // Close Modal
+        function closeModal() {
+            const modal = document.getElementById("booking-modal");
+            modal.classList.add("opacity-0");
+            modal.querySelector(".transform").classList.remove("scale-100");
+            modal.querySelector(".transform").classList.add("scale-95");
+            setTimeout(() => {
+                modal.classList.add("hidden");
+                // Reset selections after successful completion
+                clearAllSelections();
+            }, 300);
+        }
+    </script>
+</body>
+</html>

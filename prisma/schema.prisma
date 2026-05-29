@@ -7,7 +7,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -35,6 +34,31 @@ model Service {
   updatedAt   DateTime @updatedAt
 
   bookings    Booking[]
+  addons      ServiceAddon[]
+}
+
+model ServiceAddon {
+  id        String   @id @default(uuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id])
+  name      String
+  price     Float
+  isActive  Boolean  @default(true)
+}
+
+model PackageCombo {
+  id          String   @id @default(uuid())
+  name        String
+  serviceIds  String[]
+  discountPct Float
+  isActive    Boolean  @default(true)
+}
+
+model SystemSettings {
+  id        String   @id @default("global")
+  gstRate   Float    @default(18.0)
+  whatsapp  String?
+  updatedAt DateTime @updatedAt
 }
 
 model Booking {

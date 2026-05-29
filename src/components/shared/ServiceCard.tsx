@@ -30,7 +30,7 @@ export const ServiceCard = ({
   return (
     <motion.div
       whileHover={{ y: -8 }}
-      className="group relative h-full overflow-hidden rounded-[2rem] border border-slate-100 bg-white transition-all hover:border-primary/30 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] dark:border-slate-800 dark:bg-slate-900"
+      className="group relative h-full overflow-hidden rounded-[2rem] border border-gray-200 bg-white transition-all hover:border-blue-400 hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] shadow-sm"
     >
       {/* Image Container */}
       <div className="relative h-56 w-full overflow-hidden">
@@ -45,12 +45,12 @@ export const ServiceCard = ({
         {/* Badges */}
         <div className="absolute left-4 top-4 flex flex-col gap-2">
           {isFeatured && (
-            <Badge className="gradient-primary border-none text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1 rounded-full shadow-lg">
+            <Badge className="bg-blue-600 hover:bg-blue-700 border-none text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1 rounded-full shadow-lg">
               {badge || "Bestseller"}
             </Badge>
           )}
           {savings > 0 && (
-            <Badge className="bg-emerald-500 border-none text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1 rounded-full shadow-lg">
+            <Badge className="bg-emerald-500 hover:bg-emerald-600 border-none text-[10px] font-bold uppercase tracking-wider text-white px-3 py-1 rounded-full shadow-lg">
               Save ₹{savings}
             </Badge>
           )}
@@ -61,35 +61,35 @@ export const ServiceCard = ({
       <div className="p-6 space-y-4">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-extrabold uppercase tracking-widest text-primary/80">{category}</span>
-            <div className="flex items-center gap-1.5 text-xs font-bold bg-amber-50 dark:bg-amber-500/10 px-2 py-1 rounded-lg text-amber-600 dark:text-amber-500">
+            <span className="text-[11px] font-extrabold uppercase tracking-widest text-blue-600">{category}</span>
+            <div className="flex items-center gap-1.5 text-xs font-bold bg-amber-50 px-2 py-1 rounded-lg text-amber-600">
               <Star className="h-3.5 w-3.5 fill-current" />
               <span>{rating} <span className="opacity-50 font-medium">({reviews})</span></span>
             </div>
           </div>
-          <h3 className="text-xl font-bold tracking-tight line-clamp-2 leading-snug group-hover:text-primary transition-colors">{title}</h3>
+          <h3 className="text-xl font-bold tracking-tight line-clamp-2 leading-snug text-gray-900 group-hover:text-blue-600 transition-colors">{title}</h3>
         </div>
 
-        <div className="flex items-center gap-4 text-xs text-slate-500 font-medium">
+        <div className="flex items-center gap-4 text-xs text-gray-500 font-medium">
           <div className="flex items-center gap-1.5">
-            <Clock className="h-4 w-4 text-primary/60" />
+            <Clock className="h-4 w-4 text-blue-600/60" />
             <span>{duration}</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-4 border-t border-slate-50 dark:border-slate-800">
+        <div className="flex items-center justify-between pt-4 border-t border-gray-100">
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="text-2xl font-black text-slate-900 dark:text-white">₹{price}</span>
+              <span className="text-2xl font-black text-gray-900">₹{price}</span>
               {originalPrice && (
-                <span className="text-sm text-slate-400 line-through font-medium">₹{originalPrice}</span>
+                <span className="text-sm text-gray-500 line-through font-medium">₹{originalPrice}</span>
               )}
             </div>
-            <span className="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Starting Price</span>
+            <span className="text-[10px] text-gray-600 uppercase font-bold tracking-wider">Starting Price</span>
           </div>
           <Link 
             href={`/services/${id}`}
-            className={cn(buttonVariants({ size: "default" }), "rounded-2xl gradient-primary font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all px-6")}
+            className={cn(buttonVariants({ size: "default" }), "rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold transition-all px-6")}
           >
             Book
           </Link>

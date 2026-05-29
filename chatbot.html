@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSM Services – Your AI‑Powered Home Service Platform</title>
+    <!-- Compelling SEO Meta Description -->
+    <meta name="description" content="Get instant quotes and book top-rated home and business services with OSM Services' intelligent AI assistant. 15% discount on bundle bookings.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f2faf9;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        /* Premium custom scrollbar for chat feeds */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 99px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Message pop-up entrance animations */
+        @keyframes slideUpFade {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .message-animate {
+            animation: slideUpFade 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Typing indicator pulse delay configuration */
+        .dot-delay-1 { animation-delay: 0ms; }
+        .dot-delay-2 { animation-delay: 150ms; }
+        .dot-delay-3 { animation-delay: 300ms; }
+
+        /* Mascot CSS Animations */
+        @keyframes mascotBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        .animate-mascot-idle {
+            animation: mascotBounce 2.5s ease-in-out infinite;
+        }
+
+        @keyframes giggleWobble {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            20%, 60% { transform: rotate(-10deg) scale(1.08); }
+            40%, 80% { transform: rotate(10deg) scale(1.08); }
+        }
+        .animate-mascot-giggle {
+            animation: giggleWobble 0.6s ease-in-out;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased text-slate-800 bg-[#f2faf9] relative select-none">
+
+    <!-- Ambient Glowing Accents -->
+    <div class="absolute top-0 right-0 w-[45rem] h-[30rem] bg-gradient-to-b from-teal-200/40 via-emerald-100/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-gradient-to-t from-teal-200/40 via-emerald-100/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- Main Navigation Bar -->
+    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <nav class="bg-white/80 backdrop-blur-md border border-teal-100 rounded-[2rem] px-6 py-4 flex items-center justify-between shadow-sm relative z-40">
+            <!-- Brand Logotype -->
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-2xl bg-gradient-to-tr from-teal-600 to-emerald-600 flex items-center justify-center shadow-lg shadow-teal-500/10 text-white font-bold text-base tracking-wider">
+                    OSM
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-lg font-black tracking-tight text-slate-900 leading-none">OSM Services</span>
+                    <span class="text-[9px] font-bold text-teal-600 uppercase tracking-widest mt-0.5">Enterprise & Home</span>
+                </div>
+                <!-- Location badge -->
+                <div class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-100 text-[10px] font-bold text-teal-700">
+                    <i class="fa-solid fa-location-dot text-teal-500"></i> Bangalore, IN
+                </div>
+            </div>
+
+            <!-- Static Links & AI Assistant Launch Trigger -->
+            <div class="flex items-center gap-6">
+                <a href="#services-preview" class="hidden md:inline-block text-sm font-semibold text-slate-600 hover:text-teal-600 transition-colors">Services Directory</a>
+                <button onclick="toggleChatbot(true)" class="relative flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    OSM Assistant
+                </button>
+            </div>
+        </nav>
+    </header>
+    <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 flex flex-col justify-center relative z-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Grid: Branding & Dynamic Description (7 Columns) -->
+            <div class="lg:col-span-7 space-y-8">
+                <!-- Promo Deal Tag -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-xs font-extrabold text-teal-700 uppercase tracking-wider">
+                    <i class="fa-solid fa-gift animate-pulse text-teal-600"></i> Instant Bundle Discount
+                </div>
+                
+                <div class="space-y-4">
+                    <h1 class="text-4xl sm:text-5xl lg:text-[4.2rem] font-black tracking-tight leading-[1.05] text-slate-900">
+                        OSM Services – Your<br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600 font-extrabold">AI‑Powered</span> Home Service Platform
+                    </h1>
+                    <p class="text-base sm:text-lg text-slate-600 font-medium leading-relaxed max-w-2xl">
+                        Schedule premium corporate cleaning, IT setups, AC repairs, plumbing, electrical tasks, and security audits instantly. Experience our automated dispatch wizard below!
+                    </p>
+                </div>
+
+                <!-- Trust Metrics / SLA Badges -->
+                <div class="grid grid-cols-3 gap-4 max-w-xl">
+                    <div class="bg-white/80 border border-teal-100 shadow-sm p-4 rounded-2xl">
+                        <div class="text-2xl font-black text-slate-900">100%</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Quality SLA Guarantee</div>
+                    </div>
+                    <div class="bg-white/80 border border-teal-100 shadow-sm p-4 rounded-2xl">
+                        <div class="text-2xl font-black text-teal-600">15% OFF</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Book 4+ Services</div>
+                    </div>
+                    <div class="bg-white/80 border border-teal-100 shadow-sm p-4 rounded-2xl">
+                        <div class="text-2xl font-black text-emerald-600">24/7</div>
+                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1">Instant Support</div>
+                    </div>
+                </div>
+
+                <!-- Call to Action Controls -->
+                <div class="flex flex-wrap gap-4 items-center pt-2">
+                    <button onclick="toggleChatbot(true)" class="px-8 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-teal-500/20 active:scale-98 transition-all flex items-center gap-3 cursor-pointer">
+                        <i class="fa-solid fa-comment-dots text-base"></i> Launch Chat Assistant
+                    </button>
+                    <button onclick="document.getElementById('services-preview').scrollIntoView({ behavior: 'smooth' })" class="px-6 py-4 bg-white hover:bg-slate-50 text-slate-700 font-semibold border border-slate-200 rounded-2xl transition-all cursor-pointer">
+                        Explore Catalog Rates
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Grid: Live Calculator Preview Card (5 Columns) -->
+            <div id="services-preview" class="lg:col-span-5 w-full">
+                <div class="bg-white rounded-[2.5rem] border border-teal-100/85 shadow-xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-500/5 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="flex items-center justify-between mb-4 pb-4 border-b border-teal-50">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-teal-600 text-base"></i> Interactive Service Catalogue
+                        </h3>
+                        <span class="px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-100 text-[10px] font-bold text-teal-700" id="cart-counter-badge">0 Added</span>
+                    </div>
+
+                    <!-- Catalogue Grid with Hover Selection -->
+                    <div class="space-y-2.5 max-h-72 overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- Items rendered in standard price catalogue -->
+                        <div onclick="addCardService('room_cleaning')" class="flex justify-between items-center bg-teal-50/50 hover:bg-teal-100/50 border border-teal-100/50 hover:border-teal-300/40 p-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                            <div class="flex items-center gap-3">
+                                <div class="h-9 w-9 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-teal-600 shadow-sm group-hover:text-teal-700 transition-colors">
+                                    <i class="fas fa-broom"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-teal-950">Room Cleaning</span>
+                                    <span class="text-[9px] text-slate-500">Deep dusting & vacuuming</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs font-extrabold text-slate-800">₹500</span>
+                                <span class="text-[10px] text-teal-600 font-bold bg-white border border-teal-200 px-2 py-0.5 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-all">+ Add</span>
+                            </div>    </div>
+                        </div>
+
+                        <div onclick="addCardService('ac_repair')" class="flex justify-between items-center bg-teal-50/50 hover:bg-teal-100/50 border border-teal-100/40 hover:border-teal-300/40 p-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                            <div class="flex items-center gap-3">
+                                <div class="h-9 w-9 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-sky-500 shadow-sm group-hover:text-sky-700 transition-colors">
+                                    <i class="fas fa-wind"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-teal-950">AC Repair & Service</span>
+                                    <span class="text-[9px] text-slate-500">Filter cleanup & pressure check</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs font-extrabold text-slate-800">₹1200</span>
+                                <span class="text-[10px] text-teal-600 bg-white border border-teal-200 font-bold px-2 py-0.5 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-all">+ Add</span>
+                            </div>
+                        </div>
+
+                        <div onclick="addCardService('washroom_cleaning')" class="flex justify-between items-center bg-teal-50/50 hover:bg-teal-100/50 border border-teal-100/40 hover:border-teal-300/40 p-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                            <div class="flex items-center gap-3">
+                                <div class="h-9 w-9 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-cyan-500 shadow-sm group-hover:text-cyan-700 transition-colors">
+                                    <i class="fas fa-sink"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-teal-950">Washroom Cleaning</span>
+                                    <span class="text-[9px] text-slate-500">Tile scrubbing & sanitizing</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs font-extrabold text-slate-800">₹300</span>
+                                <span class="text-[10px] text-teal-600 bg-white border border-teal-200 font-bold px-2 py-0.5 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-all">+ Add</span>
+                            </div>
+                        </div>
+
+                        <div onclick="addCardService('plumbing_fix')" class="flex justify-between items-center bg-teal-50/50 hover:bg-teal-100/50 border border-teal-100/40 hover:border-teal-300/40 p-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                            <div class="flex items-center gap-3">
+                                <div class="h-9 w-9 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-indigo-500 shadow-sm group-hover:text-indigo-700 transition-colors">
+                                    <i class="fas fa-faucet"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-teal-950">Plumbing Fix</span>
+                                    <span class="text-[9px] text-slate-500">Leaks & blockage repairs</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs font-extrabold text-slate-800">₹800</span>
+                                <span class="text-[10px] text-teal-600 bg-white border border-teal-200 font-bold px-2 py-0.5 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-all">+ Add</span>
+                            </div>
+                        </div>
+
+                        <div onclick="addCardService('electrical_repair')" class="flex justify-between items-center bg-teal-50/50 hover:bg-teal-100/50 border border-teal-100/40 hover:border-teal-300/40 p-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                            <div class="flex items-center gap-3">
+                                <div class="h-9 w-9 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-yellow-500 shadow-sm group-hover:text-yellow-600 transition-colors">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-teal-950">Electrical Repair</span>
+                                    <span class="text-[9px] text-slate-500">Switchboards & load audits</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs font-extrabold text-slate-800">₹900</span>
+                                <span class="text-[10px] text-teal-600 bg-white border border-teal-200 font-bold px-2 py-0.5 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-all">+ Add</span>
+                            </div>
+                        </div>
+
+                        <div onclick="addCardService('kitchen_cleaning')" class="flex justify-between items-center bg-teal-50/50 hover:bg-teal-100/50 border border-teal-100/40 hover:border-teal-300/40 p-3 rounded-2xl cursor-pointer transition-all duration-200 group">
+                            <div class="flex items-center gap-3">
+                                <div class="h-9 w-9 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-orange-500 shadow-sm group-hover:text-orange-700 transition-colors">
+                                    <i class="fas fa-fire-burner"></i>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-teal-950">Kitchen Cleaning</span>
+                                    <span class="text-[9px] text-slate-500">Grease removal & slab wash</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono text-xs font-extrabold text-slate-800">₹400</span>
+                                <span class="text-[10px] text-teal-600 bg-white border border-teal-200 font-bold px-2 py-0.5 rounded-lg group-hover:bg-teal-600 group-hover:text-white transition-all">+ Add</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discount Notification Bar -->
+                    <div id="hero-pricing-box" class="mt-5 p-4 rounded-2xl bg-teal-50/60 border border-teal-200 flex items-center justify-between text-xs">
+                        <div class="flex items-center gap-3">
+                            <div class="h-8 w-8 bg-white border border-teal-100 rounded-xl flex items-center justify-center text-teal-600 shadow-sm">
+                                <i class="fa-solid fa-tags"></i>
+                            </div>
+                            <div>
+                                <span class="font-bold text-slate-800 block">Bundle Deal Activated</span>
+                                <span class="text-[10px] text-slate-500" id="hero-progress-desc">Select 4 services for 15% discount</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleChatbot(true)" class="px-3.5 py-1.5 rounded-xl bg-teal-600 text-white font-bold font-mono tracking-wide text-[10px] hover:bg-teal-700 transition-all cursor-pointer">
+                            Configure Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-teal-100 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-30">
+        <p class="text-xs font-semibold text-slate-600">
+            © 2026 OSM Services Inc. All rights reserved.
+        </p>
+        <div class="flex items-center gap-4 text-xs font-bold text-slate-600 font-mono tracking-wider">
+            <span>29°C</span>
+            <span>•</span>
+            <span>ENG</span>
+            <span>•</span>
+            <span id="footer-time-badge">07:56 AM</span>
+        </div>
+    </footer>
+
+
+    <!-- ==================== FLOATING CHATBOT WIDGET ==================== -->
+    <div id="osm-chatbot-widget" class="fixed bottom-6 right-6 z-50 flex flex-col items-end font-sans pointer-events-auto">
+        
+        <!-- Animated Pulsing Trigger Toggle Button -->
+        <button id="chatbot-toggle-btn" onclick="toggleChatbot()" class="flex items-center justify-center h-14 w-14 rounded-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white shadow-xl shadow-teal-500/30 hover:scale-105 active:scale-95 transition-all duration-300 relative cursor-pointer group">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-20 animate-ping group-hover:hidden"></span>
+            
+            <!-- Open Message Icon -->
+            <i id="toggle-icon-open" class="fa-solid fa-comments text-xl transition-all duration-300"></i>
+            <!-- Close Icon -->
+            <i id="toggle-icon-close" class="fa-solid fa-xmark text-xl hidden transition-all duration-300"></i>
+            
+            <!-- Live cart item pill -->
+            <span id="cart-pulse-pill" class="absolute -top-1 -right-1 bg-emerald-500 text-white text-[9px] font-bold h-5 w-5 rounded-full flex items-center justify-center border-2 border-white scale-0 transition-transform duration-300">0</span>
+        </button>
+
+        <!-- Floating Expandable Chat Panel Window -->
+        <div id="chatbot-window" class="absolute bottom-20 right-0 w-[380px] max-w-[calc(100vw-2rem)] h-[550px] max-h-[calc(100vh-8rem)] flex flex-col bg-white border border-teal-100/90 rounded-[2rem] shadow-2xl scale-0 translate-y-8 origin-bottom-right opacity-0 transition-all duration-300 pointer-events-none">
+            
+            <!-- ==================== INTERACTIVE MASCOT CHARACTER ==================== -->
+            <div id="mascot-container" class="absolute -top-[62px] left-6 z-30 transition-all duration-300 select-none scale-100 flex items-end">
+                <!-- Mascot thought bubble -->
+                <div id="mascot-thought-bubble" class="bg-teal-50 border border-teal-100 rounded-2xl px-3 py-1.5 shadow-lg text-[11px] text-teal-950 absolute -right-20 top-2 scale-0 opacity-0 transition-all duration-300 origin-bottom-left flex items-center gap-1.5 font-bold z-40">
+                    <span>Thinking</span>
+                    <span class="inline-block h-1.5 w-1.5 bg-teal-500 rounded-full animate-bounce dot-delay-1"></span>
+                    <span class="inline-block h-1.5 w-1.5 bg-teal-500 rounded-full animate-bounce dot-delay-2"></span>
+                    <span class="inline-block h-1.5 w-1.5 bg-teal-500 rounded-full animate-bounce dot-delay-3"></span>
+                </div>
+                
+                <!-- Mascot SVG Wrapper -->
+                <div id="mascot-svg-wrapper" class="animate-mascot-idle relative cursor-pointer transition-transform duration-300" onclick="triggerMascotGiggle()" title="Click to tickle me!">
+                    <svg id="mascot-svg" width="76" height="76" viewBox="0 0 100 100">
+                        <!-- Shadow -->
+                        <ellipse cx="50" cy="88" rx="26" ry="4" fill="rgba(0,0,0,0.15)" />
+                        
+                        <!-- Antenna ears (listening perk state) -->
+                        <g id="mascot-ears" class="transition-transform duration-300 origin-center">
+                            <!-- Left Antenna -->
+                            <path d="M 28 28 L 18 12 A 5 5 0 0 1 27 10 Z" fill="#0f766e" />
+                            <circle cx="21" cy="9" r="3.5" fill="#34d399" />
+                            <!-- Right Antenna -->
+                            <path d="M 72 28 L 82 12 A 5 5 0 0 0 73 10 Z" fill="#0f766e" />
+                            <circle cx="79" cy="9" r="3.5" fill="#34d399" />
+                        </g>
+
+                        <!-- Main Round Body -->
+                        <circle cx="50" cy="54" r="38" fill="#0f766e" stroke="#0d9488" stroke-width="2" />
+                        
+                        <!-- Inner Face Oval -->
+                        <ellipse cx="50" cy="57" rx="29" ry="23" fill="#FFFFFF" />
+
+                        <!-- Blush Cheeks -->
+                        <circle cx="28" cy="61" r="4.5" fill="#f43f5e" opacity="0.35" />
+                        <circle cx="72" cy="61" r="4.5" fill="#f43f5e" opacity="0.35" />
+
+                        <!-- Eyes with native bulletproof SVG blinking animations -->
+                        <g id="mascot-eyes">
+                            <!-- Left Eye background -->
+                            <ellipse cx="37" cy="48" rx="7.5" ry="7.5" fill="#0f766e">
+                                <animate attributeName="ry" values="7.5;7.5;1;7.5;7.5" dur="4s" repeatCount="indefinite" keyTimes="0;0.9;0.92;0.95;1" />
+                            </ellipse>
+                            <!-- Left Eye Pupil -->
+                            <circle id="mascot-eye-pupil-l" cx="38" cy="47" r="2.5" fill="#FFFFFF" class="transition-all duration-300" />
+                            
+                            <!-- Right Eye background -->
+                            <ellipse cx="63" cy="48" rx="7.5" ry="7.5" fill="#0f766e">
+                                <animate attributeName="ry" values="7.5;7.5;1;7.5;7.5" dur="4s" repeatCount="indefinite" keyTimes="0;0.9;0.92;0.95;1" />
+                            </ellipse>
+                            <!-- Right Eye Pupil -->
+                            <circle id="mascot-eye-pupil-r" cx="64" cy="47" r="2.5" fill="#FFFFFF" class="transition-all duration-300" />
+                        </g>
+
+                        <!-- Expression Mouth -->
+                        <path id="mascot-mouth" d="M 42 62 Q 50 68 58 62" stroke="#0f766e" stroke-width="3.5" fill="none" stroke-linecap="round" class="transition-all duration-100" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Chat Window Header Panel -->
+            <div class="p-4 bg-gradient-to-r from-teal-600 via-teal-700 to-emerald-600 flex items-center justify-between text-white shadow-md relative z-10 rounded-t-[2rem]">
+                <div class="flex items-center gap-3 pl-16"> <!-- Left padding to give mascot breathing room -->
+                    <div class="flex flex-col">
+                        <h4 class="font-bold text-sm leading-none">OSM Assistant</h4>
+                        <span class="text-[10px] text-teal-100 font-bold uppercase tracking-wider block mt-1">Online | 24/7 Agent</span>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-1">
+                    <!-- Reset / Start Over Session trigger -->
+                    <button onclick="triggerResetSession()" class="p-2 text-teal-100 hover:text-white hover:bg-white/10 rounded-xl transition-all cursor-pointer" title="Start Over">
+                        <i class="fa-solid fa-arrows-rotate text-sm"></i>
+                    </button>
+                    <!-- Close button -->
+                    <button onclick="toggleChatbot(false)" class="p-2 text-teal-100 hover:text-white hover:bg-white/10 rounded-xl transition-all cursor-pointer">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Conversations Log Body -->
+            <div id="chat-messages-container" class="flex-1 p-4 overflow-y-auto bg-teal-50/10 custom-scrollbar space-y-4">
+                <!-- Initial welcoming message -->
+                <div class="flex items-start gap-2.5 max-w-[85%] message-animate">
+                    <div class="h-8 w-8 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center shrink-0 text-teal-600 shadow-sm">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-100/80 p-3 rounded-2xl rounded-tl-sm text-xs leading-relaxed shadow-md text-teal-950">
+                        Hi! I'm OSM Assistant. Need a price quote or booking? Type a service name or ask for help.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Typing Indicator Bubble -->
+            <div id="typing-indicator" class="px-4 py-2.5 bg-transparent flex items-center justify-start hidden">
+                <div class="flex items-start gap-2.5 max-w-[85%]">
+                    <div class="h-8 w-8 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center shrink-0 text-teal-600 shadow-sm">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-100/80 px-4 py-3 rounded-2xl rounded-tl-sm flex items-center gap-1 shadow-md">
+                        <span class="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce dot-delay-1"></span>
+                        <span class="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce dot-delay-2"></span>
+                        <span class="w-1.5 h-1.5 bg-teal-400 rounded-full animate-bounce dot-delay-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Action Reply Pills Selection -->
+            <div id="chat-quick-actions" class="px-4 py-2 bg-white border-t border-teal-50 flex items-center gap-2 overflow-x-auto custom-scrollbar shrink-0">
+                <button onclick="handleQuickAction('Show Services')" class="px-3.5 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-700 hover:text-teal-900 border border-teal-100/60 text-[11px] font-bold rounded-xl whitespace-nowrap transition-all duration-200 cursor-pointer">
+                    <i class="fa-solid fa-table-list mr-1"></i> Show Services
+                </button>
+                <button onclick="handleQuickAction('Get a Quote')" class="px-3.5 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-700 hover:text-teal-900 border border-teal-100/60 text-[11px] font-bold rounded-xl whitespace-nowrap transition-all duration-200 cursor-pointer">
+                    <i class="fa-solid fa-calculator mr-1"></i> Get a Quote
+                </button>
+                <button onclick="handleQuickAction('Book Now')" class="px-3.5 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 hover:text-emerald-900 border border-emerald-100/60 text-[11px] font-extrabold rounded-xl whitespace-nowrap transition-all duration-200 cursor-pointer">
+                    <i class="fa-solid fa-calendar-check mr-1"></i> Book Now
+                </button>
+                <button onclick="handleQuickAction('Pricing')" class="px-3.5 py-1.5 bg-teal-50 hover:bg-teal-100 text-teal-700 hover:text-teal-900 border border-teal-100/60 text-[11px] font-bold rounded-xl whitespace-nowrap transition-all duration-200 cursor-pointer">
+                    <i class="fa-solid fa-tags mr-1"></i> Pricing
+                </button>
+            </div>
+
+            <!-- Footer Message Input form -->
+            <form id="chat-input-form" onsubmit="handleMessageSubmit(event)" class="p-3 bg-white border-t border-teal-50 flex items-center gap-2.5 shrink-0 rounded-b-[2rem]">
+                <div class="flex-1 bg-teal-50/50 hover:bg-teal-50 border border-teal-100 focus-within:border-teal-400 focus-within:bg-white rounded-2xl flex items-center px-4 h-12 transition-all">
+                    <input 
+                        type="text" 
+                        id="user-chat-input"
+                        placeholder="Type service (e.g. AC repair, Room cleaning)..."
+                        class="w-full bg-transparent border-none outline-none text-teal-950 text-xs font-medium placeholder-teal-600/40"
+                        autocomplete="off"
+                    />
+                </div>
+                <button type="submit" class="h-12 w-12 rounded-2xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer">
+                    <i class="fa-solid fa-paper-plane text-sm"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- Interactive Javascript Logic Engine -->
+    <script>
+        // Core home & business service data matrix
+        const services = [
+            { id: "room_cleaning", name: "Room cleaning", keywords: ["room cleaning", "clean room", "room clean", "vacuuming", "sweeping"], price: 500, icon: "fa-broom" },
+            { id: "ac_repair", name: "AC repair", keywords: ["ac repair", "air conditioner", "ac servicing", "ac filter", "ac fix", "ac clean"], price: 1200, icon: "fa-wind" },
+            { id: "washroom_cleaning", name: "Washroom cleaning", keywords: ["washroom cleaning", "bathroom cleaning", "washroom clean", "toilet cleaning", "bathroom clean"], price: 300, icon: "fa-sink" },
+            { id: "kitchen_cleaning", name: "Kitchen cleaning", keywords: ["kitchen cleaning", "kitchen clean", "kitchen deep clean"], price: 400, icon: "fa-fire-burner" },
+            { id: "plumbing_fix", name: "Plumbing fix", keywords: ["plumbing fix", "plumbing", "leak repair", "blockage cleaning", "tap repair", "plumber"], price: 800, icon: "fa-faucet" },
+            { id: "electrical_repair", name: "Electrical repair", keywords: ["electrical repair", "electrical", "electrician", "short circuit", "switchboard"], price: 900, icon: "fa-bolt" },
+            { id: "paint_touchup", name: "Paint touch‑up", keywords: ["paint touch", "painting", "wall paint", "acrylic coating"], price: 1500, icon: "fa-brush" },
+            { id: "furniture_assembly", name: "Furniture assembly", keywords: ["furniture assembly", "assemble furniture", "cupboard assembly", "bed assembly"], price: 600, icon: "fa-screwdriver" },
+            { id: "corporate_cleaning", name: "Corporate cleaning", keywords: ["corporate cleaning", "office cleaning", "business cleaning", "office deep clean"], price: 2500, icon: "fa-building-shield" },
+            { id: "it_infrastructure", name: "IT infrastructure setup", keywords: ["it infrastructure", "it setup", "network setup", "router setup", "wifi setup"], price: 4000, icon: "fa-network-wired" },
+            { id: "security_audit", name: "Security audit", keywords: ["security audit", "security check", "cctv audit", "safety audit"], price: 3000, icon: "fa-shield-halved" },
+            { id: "office_setup", name: "Office setup", keywords: ["office setup", "setup office", "office workstations"], price: 3500, icon: "fa-chair" }
+        ];
+
+        // Conversational Engine session variables
+        let selectedServices = [];
+        let chatState = 'GREETING'; // GREETING | BOOKING_NAME | BOOKING_PHONE | BOOKING_ADDRESS | BOOKING_TIME
+        let bookingData = { name: "", phone: "", address: "", time: "" };
+        let isChatOpen = false;
+
+        // Mascot speaking intervals
+        let mascotSpeakInterval = null;
+        let speakStep = 0;
+
+        // Sync local clock & attach focus triggers
+        document.addEventListener("DOMContentLoaded", () => {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("footer-time-badge").innerText = hours + ':' + minutes + ' ' + ampm;
+
+            // Wire input focus events to listening perked tilt
+            const chatInput = document.getElementById("user-chat-input");
+            if (chatInput) {
+                chatInput.addEventListener("focus", () => setMascotListening(true));
+                chatInput.addEventListener("blur", () => setMascotListening(false));
+            }
+        });
+
+        // Toggle Expandable Widget State
+        function toggleChatbot(forceState) {
+            const chatbotWindow = document.getElementById("chatbot-window");
+            const toggleIconOpen = document.getElementById("toggle-icon-open");
+            const toggleIconClose = document.getElementById("toggle-icon-close");
+            
+            isChatOpen = (forceState !== undefined) ? forceState : !isChatOpen;
+            
+            if (isChatOpen) {
+                chatbotWindow.classList.remove("scale-0", "translate-y-8", "opacity-0", "pointer-events-none");
+                chatbotWindow.classList.add("scale-100", "translate-y-0", "opacity-1", "pointer-events-auto");
+                toggleIconOpen.classList.add("hidden");
+                toggleIconClose.classList.remove("hidden");
+                // Focus text input field
+                setTimeout(() => document.getElementById("user-chat-input").focus(), 150);
+            } else {
+                chatbotWindow.classList.add("scale-0", "translate-y-8", "opacity-0", "pointer-events-none");
+                chatbotWindow.classList.remove("scale-100", "translate-y-0", "opacity-1", "pointer-events-auto");
+                toggleIconOpen.classList.remove("hidden");
+                toggleIconClose.classList.add("hidden");
+            }
+        }
+
+        // ==================== MASCOT REACTIVE TRIGGERS ====================
+
+        // Speaking: Cyclically morphing mouth shape loops during speech
+        function startMascotSpeaking() {
+            if (mascotSpeakInterval) return;
+            const mouth = document.getElementById("mascot-mouth");
+            if (!mouth) return;
+
+            speakStep = 0;
+            mascotSpeakInterval = setInterval(() => {
+                speakStep = (speakStep + 1) % 4;
+                if (speakStep === 0) {
+                    mouth.setAttribute("d", "M 44 63 Q 50 55 56 63"); // Small open mouth
+                    mouth.setAttribute("fill", "#0F172A");
+                } else if (speakStep === 1) {
+                    mouth.setAttribute("d", "M 42 62 Q 50 68 58 62"); // Idle smile shape
+                    mouth.setAttribute("fill", "none");
+                } else if (speakStep === 2) {
+                    mouth.setAttribute("d", "M 45 61 Q 50 58 55 61"); // Rounded talking circle
+                    mouth.setAttribute("fill", "#0F172A");
+                } else {
+                    mouth.setAttribute("d", "M 42 62 Q 50 62 58 62"); // straight speaking line
+                    mouth.setAttribute("fill", "none");
+                }
+            }, 120);
+        }
+
+        function stopMascotSpeaking() {
+            if (mascotSpeakInterval) {
+                clearInterval(mascotSpeakInterval);
+                mascotSpeakInterval = null;
+            }
+            const mouth = document.getElementById("mascot-mouth");
+            if (mouth) {
+                mouth.setAttribute("d", "M 42 62 Q 50 68 58 62");
+                mouth.setAttribute("fill", "none");
+            }
+        }
+
+        // Listening: head tilts & antenna perking on text input focus
+        function setMascotListening(isListening) {
+            const wrapper = document.getElementById("mascot-svg-wrapper");
+            const ears = document.getElementById("mascot-ears");
+            if (!wrapper || !ears) return;
+
+            if (isListening) {
+                wrapper.style.transform = "rotate(4deg) scale(1.05)";
+                ears.style.transform = "translateY(-3px)";
+            } else {
+                wrapper.style.transform = "rotate(0deg) scale(1)";
+                ears.style.transform = "translateY(0px)";
+            }
+        }
+
+        // Thinking: Shift eye pupils up + scale thought bubble
+        function setMascotThinking(isThinking) {
+            const pupilL = document.getElementById("mascot-eye-pupil-l");
+            const pupilR = document.getElementById("mascot-eye-pupil-r");
+            const bubble = document.getElementById("mascot-thought-bubble");
+            if (!pupilL || !pupilR || !bubble) return;
+
+            if (isThinking) {
+                pupilL.setAttribute("cy", "43");
+                pupilL.setAttribute("cx", "38");
+                pupilR.setAttribute("cy", "43");
+                pupilR.setAttribute("cx", "64");
+                bubble.classList.remove("scale-0", "opacity-0");
+                bubble.classList.add("scale-100", "opacity-100");
+            } else {
+                pupilL.setAttribute("cy", "47");
+                pupilL.setAttribute("cx", "38");
+                pupilR.setAttribute("cy", "47");
+                pupilR.setAttribute("cx", "64");
+                bubble.classList.remove("scale-100", "opacity-100");
+                bubble.classList.add("scale-0", "opacity-0");
+            }
+        }
+
+        // giggling wobble shake Easter Egg
+        function triggerMascotGiggle() {
+            const wrapper = document.getElementById("mascot-svg-wrapper");
+            const mouth = document.getElementById("mascot-mouth");
+            if (!wrapper || !mouth) return;
+
+            wrapper.classList.remove("animate-mascot-idle");
+            wrapper.classList.add("animate-mascot-giggle");
+            mouth.setAttribute("d", "M 36 60 A 14 14 0 1 0 64 60 Z");
+            mouth.setAttribute("fill", "#0F172A");
+
+            setTimeout(() => {
+                wrapper.classList.remove("animate-mascot-giggle");
+                wrapper.classList.add("animate-mascot-idle");
+                mouth.setAttribute("d", "M 42 62 Q 50 68 58 62");
+                mouth.setAttribute("fill", "none");
+            }, 600);
+
+            renderMessage("✨ *Hehe, that tickles! I'm Osmy, your home service assistant!* ✨", "bot");
+        }
+
+        // ==================== END TRIGGERS ====================
+
+        // Add service selected directly from the catalogue card layout
+        function addCardService(serviceId) {
+            const service = services.find(s => s.id === serviceId);
+            if (!service) return;
+
+            // Open chat automatically
+            toggleChatbot(true);
+
+            // Render visual user typing message to log
+            renderMessage(`Add ${service.name}`, "user");
+            
+            // Activate Mascot states
+            setMascotThinking(true);
+
+            setTimeout(() => {
+                setMascotThinking(false);
+                showTyping(true);
+                startMascotSpeaking();
+
+                setTimeout(() => {
+                    showTyping(false);
+                    stopMascotSpeaking();
+                    
+                    let response = "";
+                    if (selectedServices.includes(serviceId)) {
+                        response = `You have already selected **${service.name}**! Type "show cart" to see your complete list, or "book now" to schedule!`;
+                    } else {
+                        selectedServices.push(serviceId);
+                        updateCartBadge();
+                        
+                        const subtotal = calculateSubtotal();
+                        const discountApplied = selectedServices.length >= 4;
+                        const discountAmount = discountApplied ? Math.round(subtotal * 0.15) : 0;
+                        const finalTotal = subtotal - discountAmount;
+
+                        // Build list of all currently selected services
+                        const selectedListStr = selectedServices.map(id => {
+                            const s = services.find(srv => srv.id === id);
+                            return `• ${s.name} (₹${s.price})`;
+                        }).join("<br>");
+
+                        response = `Got it! I have added **${service.name} (₹${service.price})** to your cart.<br><br>`;
+                        response += `**Current Selections (${selectedServices.length}):**<br>${selectedListStr}<br>`;
+                        response += `**Subtotal:** ₹${subtotal}<br>`;
+
+                        if (discountApplied) {
+                            response += `✨ **15% Discount Applied!** Saved ₹${discountAmount}.<br>**Total Price:** **₹${finalTotal}**.<br><br>Shall I proceed to schedule a booking for you?`;
+                        } else {
+                            const remaining = 4 - selectedServices.length;
+                            let suggestionText = "";
+                            if (remaining === 3) {
+                                suggestionText = `Add 3 more services to unlock a **15% discount**! I suggest **Plumbing Fix (₹800)** or **Electrical Repair (₹900)**.`;
+                            } else if (remaining === 2) {
+                                suggestionText = `Add 2 more services to unlock a **15% discount**! I suggest **Room Cleaning (₹500)** or **Washroom Cleaning (₹300)**.`;
+                            } else if (remaining === 1) {
+                                suggestionText = `Add **one more service** to unlock a **15% discount**! Suggest: **Kitchen cleaning (₹400)**.`;
+                            }
+                            response += `No discount (add ${remaining} more service${remaining > 1 ? 's' : ''} for 15% off).<br>**Total Price:** **₹${subtotal}**.<br><br>💡 *${suggestionText}*<br><br>Would you like to add any other service?`;
+                        }
+                    }
+                    renderMessage(response, "bot");
+                }, 1000);
+            }, 500);
+        }
+
+        // Handle Quick Action Pill Clicks
+        function handleQuickAction(actionName) {
+            renderMessage(actionName, "user");
+            setMascotThinking(true);
+
+            setTimeout(() => {
+                setMascotThinking(false);
+                showTyping(true);
+                startMascotSpeaking();
+
+                setTimeout(() => {
+                    showTyping(false);
+                    stopMascotSpeaking();
+                    const reply = processIntentEngine(actionName);
+                    renderMessage(reply, "bot");
+                }, 1000);
+            }, 500);
+        }
+
+        // Handle User text submission
+        function handleMessageSubmit(event) {
+            event.preventDefault();
+            const inputField = document.getElementById("user-chat-input");
+            const text = inputField.value.trim();
+            if (!text) return;
+
+            inputField.value = "";
+            renderMessage(text, "user");
+            
+            // Trigger mascot thinking sequence
+            setMascotThinking(true);
+
+            setTimeout(() => {
+                setMascotThinking(false);
+                showTyping(true);
+                startMascotSpeaking();
+
+                setTimeout(() => {
+                    showTyping(false);
+                    stopMascotSpeaking();
+                    const reply = processIntentEngine(text);
+                    renderMessage(reply, "bot");
+                }, 1000);
+            }, 500);
+        }
+
+        // Show/Hide typist simulator indicator bubble
+        function showTyping(visible) {
+            const indicator = document.getElementById("typing-indicator");
+            const container = document.getElementById("chat-messages-container");
+            
+            if (visible) {
+                indicator.classList.remove("hidden");
+            } else {
+                indicator.classList.add("hidden");
+            }
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Render Message Bubbles inside Conversation Log
+        function renderMessage(text, sender) {
+            const container = document.getElementById("chat-messages-container");
+            const bubbleRow = document.createElement("div");
+            bubbleRow.className = "flex items-start gap-2.5 max-w-[85%] message-animate";
+            
+            if (sender === "user") {
+                bubbleRow.className += " ml-auto justify-end";
+                bubbleRow.innerHTML = `
+                    <div class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white p-3 rounded-2xl rounded-tr-sm text-xs leading-relaxed shadow-lg shadow-teal-500/10 font-medium">
+                        ${escapeHTML(text)}
+                    </div>
+                `;
+            } else {
+                // Parse markdown bold (**text**) to high-contrast bold and italic (*text*) to italic
+                let parsedText = text;
+                parsedText = parsedText.replace(/\*\*(.*?)\*\*/g, "<strong class='font-black text-teal-900'>$1</strong>");
+                parsedText = parsedText.replace(/\*(.*?)\*/g, "<em class='italic text-teal-700'>$1</em>");
+
+                bubbleRow.innerHTML = `
+                    <div class="h-8 w-8 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center shrink-0 text-teal-600 shadow-sm">
+                        <i class="fa-solid fa-robot text-xs"></i>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-100/80 p-3 rounded-2xl rounded-tl-sm text-xs leading-relaxed shadow-md text-teal-950">
+                        ${parsedText}
+                    </div>
+                `;
+            }
+
+            container.appendChild(bubbleRow);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Start Over Session reset handler
+        function triggerResetSession() {
+            resetSession();
+            renderMessage("Session reset successfully! Hi! I'm OSM Assistant. Need a price quote or booking? Type a service name or ask for help.", "bot");
+        }
+
+        function resetSession() {
+            selectedServices = [];
+            chatState = 'GREETING';
+            bookingData = { name: "", phone: "", address: "", time: "" };
+            updateCartBadge();
+        }
+
+        // Sync visual badges and counts in real-time
+        function updateCartBadge() {
+            const pulsePill = document.getElementById("cart-pulse-pill");
+            const cartCounter = document.getElementById("cart-counter-badge");
+            const heroDesc = document.getElementById("hero-progress-desc");
+            const count = selectedServices.length;
+
+            // Header/Badge counter
+            cartCounter.innerText = `${count} Added`;
+            pulsePill.innerText = count;
+
+            if (count > 0) {
+                pulsePill.classList.remove("scale-0");
+                pulsePill.classList.add("scale-100");
+            } else {
+                pulsePill.classList.remove("scale-100");
+                pulsePill.classList.add("scale-0");
+            }
+
+            // Sync hero pricing box description text
+            if (count === 0) {
+                heroDesc.innerText = "Select 4 services for 15% discount";
+            } else if (count < 4) {
+                heroDesc.innerHTML = `Selected ${count} services. Add <strong class="text-violet-400 font-extrabold">${4 - count} more</strong> for 15% off!`;
+            } else {
+                heroDesc.innerHTML = `🎉 <strong class="text-emerald-400 font-extrabold">15% Discount unlocked!</strong> (${count} services selected)`;
+            }
+        }
+
+        function calculateSubtotal() {
+            let subtotal = 0;
+            selectedServices.forEach(id => {
+                const s = services.find(srv => srv.id === id);
+                if (s) subtotal += s.price;
+            });
+            return subtotal;
+        }
+
+        // Standalone Custom Chatbot parsing engine
+        function processIntentEngine(text) {
+            const lower = text.trim().toLowerCase();
+
+            // Handle startover commands
+            if (lower === "start over" || lower === "reset" || lower === "clear session") {
+                resetSession();
+                return "Session reset successfully! Hi! I'm OSM Assistant. Need a price quote or booking? Type a service name or ask for help.";
+            }
+
+            // ================= STATE MACHINE INVOLVING BOOKING DETAILS =================
+            if (chatState === 'BOOKING_NAME') {
+                if (lower.length < 2) {
+                    return "Please provide a valid full name (minimum 2 characters).";
+                }
+                bookingData.name = text.trim();
+                chatState = 'BOOKING_PHONE';
+                return `Got it, **${bookingData.name}**! Next, what is your **phone number**?`;
+            }
+
+            if (chatState === 'BOOKING_PHONE') {
+                const cleanedPhone = lower.replace(/[\s\-\(\)\+]/g, "");
+                const phoneRegex = /^[0-9]{10,14}$/;
+                if (!phoneRegex.test(cleanedPhone)) {
+                    return "Please enter a valid phone number (e.g. 9876543210 or +91 9876543210).";
+                }
+                bookingData.phone = text.trim();
+                chatState = 'BOOKING_ADDRESS';
+                return "Thank you. What is the **address or area** for the service deployment?";
+            }
+
+            if (chatState === 'BOOKING_ADDRESS') {
+                if (lower.length < 5) {
+                    return "Please provide a more specific address or area location.";
+                }
+                bookingData.address = text.trim();
+                chatState = 'BOOKING_TIME';
+                return "Got it. When would you prefer the service? Please specify a **preferred date and time** (e.g., Tomorrow 10 AM, Saturday afternoon, or 28th May at 3 PM).";
+            }
+
+            if (chatState === 'BOOKING_TIME') {
+                if (lower.length < 2) {
+                    return "Please enter a preferred date and time.";
+                }
+                bookingData.time = text.trim();
+                chatState = 'GREETING'; // Reset state
+
+                const bookingId = "OSM-" + Math.floor(100000 + Math.random() * 900000);
+                const subtotal = calculateSubtotal();
+                const discountApplied = selectedServices.length >= 4;
+                const discountAmount = discountApplied ? Math.round(subtotal * 0.15) : 0;
+                const finalTotal = subtotal - discountAmount;
+
+                const bookingSummary = {
+                    bookingId: bookingId,
+                    client: bookingData,
+                    services: selectedServices.map(id => {
+                        const s = services.find(srv => srv.id === id);
+                        return { name: s.name, price: s.price };
+                    }),
+                    subtotal: subtotal,
+                    discount: discountAmount,
+                    total: finalTotal,
+                    timestamp: new Date().toISOString()
+                };
+
+                console.log("SUCCESSFUL BOOKING OBJECT CREATED:", bookingSummary);
+
+                const serviceLines = selectedServices.map(id => {
+                    const s = services.find(srv => srv.id === id);
+                    return `• ${s.name} (₹${s.price})`;
+                }).join("<br>");
+
+                const summaryHtml = `
+                    <div class="bg-emerald-50/50 border border-emerald-100 rounded-2xl p-4 text-teal-950 space-y-3 mt-1 shadow-sm">
+                        <div class="flex items-center gap-2 text-xs font-bold text-emerald-700 uppercase tracking-wide">
+                            <i class="fa-solid fa-circle-check text-base"></i> Booking Registered
+                        </div>
+                        <div class="text-[10px] text-teal-600/85 font-mono">ID: <span class="text-teal-700 font-bold">${bookingId}</span></div>
+                        
+                        <div class="border-t border-teal-100 pt-2 text-xs">
+                            <strong class="text-teal-800">Selected Services:</strong><br>
+                            ${serviceLines}
+                        </div>
+                        
+                        <div class="border-t border-teal-100 pt-2 text-xs space-y-1">
+                            <div class="flex justify-between"><span>Subtotal:</span> <span>₹${subtotal}</span></div>
+                            ${discountApplied ? `<div class="flex justify-between text-emerald-600 font-semibold"><span>Discount (15%):</span> <span>-₹${discountAmount}</span></div>` : ""}
+                            <div class="flex justify-between font-bold text-teal-900 border-t border-teal-100 pt-1 text-sm"><span>Total:</span> <span>₹${finalTotal}</span></div>
+                        </div>
+                        
+                        <div class="border-t border-teal-100 pt-2 text-xs space-y-0.5 text-teal-800 font-medium">
+                            <div><strong>Name:</strong> ${bookingData.name}</div>
+                            <div><strong>Phone:</strong> ${bookingData.phone}</div>
+                            <div><strong>Address:</strong> ${bookingData.address}</div>
+                            <div><strong>Time:</strong> ${bookingData.time}</div>
+                        </div>
+                    </div>
+                    <p class="mt-3 text-xs leading-relaxed text-slate-600">🎉 **We will call you shortly.** Our technician team is reviewing the dispatch queue!</p>
+                `;
+
+                selectedServices = [];
+                updateCartBadge();
+
+                return summaryHtml;
+            }
+
+            // ================= CART VIEWING COMMANDS =================
+            if (lower === "show cart" || lower === "cart" || lower === "view cart") {
+                if (selectedServices.length === 0) {
+                    return "Your service cart is currently empty. To add services, simply type their names, e.g., 'I need room cleaning and AC repair'.";
+                }
+                
+                const subtotal = calculateSubtotal();
+                const discountApplied = selectedServices.length >= 4;
+                const discountAmount = discountApplied ? Math.round(subtotal * 0.15) : 0;
+                const finalTotal = subtotal - discountAmount;
+
+                const selectedListStr = selectedServices.map(id => {
+                    const s = services.find(srv => srv.id === id);
+                    return `• ${s.name} (₹${s.price})`;
+                }).join("<br>");
+
+                let summary = `🛒 **Your Service Cart (${selectedServices.length} items):**<br>${selectedListStr}<br><br>`;
+                summary += `**Subtotal:** ₹${subtotal}<br>`;
+                if (discountApplied) {
+                    summary += `✨ **Discount (15% applied):** -₹${discountAmount}<br>**Final Total:** **₹${finalTotal}**<br><br>Ready to schedule? Type **"book now"**!`;
+                } else {
+                    const remaining = 4 - selectedServices.length;
+                    summary += `**Total Price:** **₹${subtotal}**<br><br>💡 Add ${remaining} more service${remaining > 1 ? 's' : ''} to unlock **15% off**!`;
+                }
+                return summary;
+            }
+
+            if (lower === "clear all" || lower === "clear cart" || lower === "empty cart") {
+                selectedServices = [];
+                updateCartBadge();
+                return "I've emptied your service cart. What services can I help you with now?";
+            }
+
+            if (lower === "pricing" || lower === "show services" || lower === "services" || lower === "list services" || lower === "get a quote") {
+                let listHtml = `<div class="space-y-2 mt-1">`;
+                services.forEach(s => {
+                    listHtml += `
+                        <div class="flex justify-between items-center bg-teal-50/40 border border-teal-100/60 p-2 rounded-xl text-[11px]">
+                            <div class="flex items-center gap-2">
+                                <i class="fas ${s.icon} text-teal-700 w-4 text-center"></i>
+                                <span class="font-bold text-teal-950">${s.name}</span>
+                            </div>
+                            <span class="font-mono text-teal-700 bg-white border border-teal-200/50 px-2 py-0.5 rounded-md font-bold">₹${s.price}</span>
+                        </div>
+                    `;
+                });
+                listHtml += `</div>`;
+                return `Here is our complete services catalogue rate card:<br>${listHtml}<br>To add any service, just type its name!`;
+            }
+
+            // ================= FAQs =================
+            if (lower.includes("working hour") || lower.includes("timings") || lower.includes("open") || lower.includes("hours")) {
+                return "Our online booking system is active 24/7. Standard service deployment runs from **8:00 AM to 8:00 PM daily**, including weekends. For urgent corporate escalation, dispatch is available round-the-clock.";
+            }
+            if (lower.includes("guarantee") || lower.includes("warranty") || lower.includes("remediation") || lower.includes("refund")) {
+                return "We stand by our work! OSM Services offers a **100% Quality Assurance SLA**. If a service is not performed to your expectations, we will dispatch a remediation unit within 48 hours completely free.";
+            }
+            if (lower.includes("payment") || lower.includes("how to pay") || lower.includes("card") || lower.includes("cash") || lower.includes("upi")) {
+                return "We offer flexible payment options! You can pay using **UPI (GPay/PhonePe), Credit/Debit cards, Net Banking**, or **Cash on Delivery (COD)** once the service is successfully completed.";
+            }
+
+            // ================= BOOKING FLOW TRIGGER =================
+            if (lower.includes("book now") || lower.includes("proceed to book") || lower.includes("schedule booking") || lower === "book" || lower === "yes, book") {
+                if (selectedServices.length === 0) {
+                    return "Your cart is currently empty! Please select at least one service before booking. Try saying: *'I need room cleaning and plumbing'* or select items directly from the layout!";
+                }
+                chatState = 'BOOKING_NAME';
+                return "Wonderful! Let's get your booking scheduled.<br><br>First, what is your **full name**?";
+            }
+
+            // ================= REMOVE SERVICE PARSING =================
+            const removeKeywords = ["remove", "delete", "clear", "cancel", "take out", "exclude"];
+            let isRemoveCommand = false;
+            let removeTarget = "";
+
+            for (const kw of removeKeywords) {
+                if (lower.startsWith(kw + " ") || lower.includes(" " + kw + " ")) {
+                    isRemoveCommand = true;
+                    const idx = lower.indexOf(kw);
+                    removeTarget = lower.substring(idx + kw.length).trim();
+                    break;
+                }
+            }
+
+            if (isRemoveCommand && removeTarget) {
+                let matchedService = null;
+                for (const s of services) {
+                    for (const keyw of s.keywords) {
+                        if (removeTarget.includes(keyw) || keyw.includes(removeTarget)) {
+                            matchedService = s;
+                            break;
+                        }
+                    }
+                    if (matchedService) break;
+                }
+
+                if (matchedService) {
+                    const idx = selectedServices.indexOf(matchedService.id);
+                    if (idx > -1) {
+                        selectedServices.splice(idx, 1);
+                        updateCartBadge();
+                        
+                        const subtotal = calculateSubtotal();
+                        const discountApplied = selectedServices.length >= 4;
+                        const finalTotal = discountApplied ? Math.round(subtotal * 0.85) : subtotal;
+
+                        return `Removed **${matchedService.name}** from your selection.<br><br>
+                                **Current Selections (${selectedServices.length}):** Subtotal is **₹${subtotal}**. 
+                                ${selectedServices.length > 0 ? `Total to pay: **₹${finalTotal}**.` : "Your cart is empty."}`;
+                    } else {
+                        return `**${matchedService.name}** was not in your selection cart. Type "show cart" to see your current items.`;
+                    }
+                } else {
+                    return `I couldn't identify which service you wanted to remove in "${removeTarget}". Try typing: "remove AC repair" or "remove room cleaning".`;
+                }
+            }
+
+            // ================= ADD / SCAN GENERAL SERVICES =================
+            const addedServices = [];
+            const alreadySelectedServices = [];
+
+            services.forEach(s => {
+                let matched = false;
+                s.keywords.forEach(keyw => {
+                    if (lower.includes(keyw)) {
+                        matched = true;
+                    }
+                });
+
+                if (matched) {
+                    if (selectedServices.includes(s.id)) {
+                        alreadySelectedServices.push(s);
+                    } else {
+                        selectedServices.push(s.id);
+                        addedServices.push(s);
+                    }
+                }
+            });
+
+            if (addedServices.length > 0) {
+                updateCartBadge();
+                const subtotal = calculateSubtotal();
+                const discountApplied = selectedServices.length >= 4;
+                const discountAmount = discountApplied ? Math.round(subtotal * 0.15) : 0;
+                const finalTotal = subtotal - discountAmount;
+
+                let addedMessage = "Got it! I have added ";
+                const namesWithPrices = addedServices.map(s => `**${s.name} (₹${s.price})**`);
+                if (namesWithPrices.length === 1) {
+                    addedMessage += namesWithPrices[0];
+                } else if (namesWithPrices.length === 2) {
+                    addedMessage += `${namesWithPrices[0]} and ${namesWithPrices[1]}`;
+                } else {
+                    const last = namesWithPrices.pop();
+                    addedMessage += `${namesWithPrices.join(", ")}, and ${last}`;
+                }
+                addedMessage += " to your cart.<br><br>";
+
+                const selectedListStr = selectedServices.map(id => {
+                    const s = services.find(srv => srv.id === id);
+                    return `• ${s.name} (₹${s.price})`;
+                }).join("<br>");
+
+                addedMessage += `**Current Selections (${selectedServices.length}):**<br>${selectedListStr}<br>`;
+                addedMessage += `**Subtotal:** ₹${subtotal}<br>`;
+
+                if (discountApplied) {
+                    addedMessage += `✨ **15% Discount Applied!** Saved ₹${discountAmount}.<br>**Total Price:** **₹${finalTotal}**.<br><br>Shall I proceed to schedule a booking for you?`;
+                } else {
+                    const remaining = 4 - selectedServices.length;
+                    let suggestionText = "";
+                    if (remaining === 3) {
+                        suggestionText = `Add 3 more services to unlock a **15% discount**! I suggest **Plumbing Fix (₹800)** or **Electrical Repair (₹900)**.`;
+                    } else if (remaining === 2) {
+                        suggestionText = `Add 2 more services to unlock a **15% discount**! I suggest **Room Cleaning (₹500)** or **Washroom Cleaning (₹300)**.`;
+                    } else if (remaining === 1) {
+                        suggestionText = `Add **one more service** to unlock a **15% discount**! Suggest: **Kitchen cleaning (₹400)**.`;
+                    }
+                    addedMessage += `No discount (add ${remaining} more service${remaining > 1 ? 's' : ''} for 15% off).<br>**Total Price:** **₹${subtotal}**.<br><br>💡 *${suggestionText}*<br><br>Would you like to add any other service?`;
+                }
+
+                return addedMessage;
+            }
+
+            if (alreadySelectedServices.length > 0 && addedServices.length === 0) {
+                return `You already selected ${alreadySelectedServices.map(s => `**${s.name}**`).join(" and ")}. Type "show cart" to see your complete list, or "book now" to schedule!`;
+            }
+
+            // ================= FALLBACK =================
+            return `I can help with services like **cleaning, AC repair, plumbing, painting, security audits, and office setups**.<br><br>Try asking for a price estimate (e.g. *"I need room cleaning and electrical repair"*) or typing **"book now"** to schedule!`;
+        }
+
+        // HTML escaping utility for safe chat injection
+        function escapeHTML(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

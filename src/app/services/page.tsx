@@ -507,33 +507,33 @@ function ServicesContent() {
 
       {/* Categories Details Popup/Modal */}
       <AnimatePresence>
-        {selectedExplorerCategory && (
+         {selectedExplorerCategory && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
              <motion.div
                initial={{ opacity: 0, scale: 0.95, y: 20 }}
                animate={{ opacity: 1, scale: 1, y: 0 }}
                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-               className="relative max-w-2xl w-full bg-white dark:bg-slate-900 border-2 border-primary/20 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col gap-6"
+               className="relative max-w-2xl w-full bg-white dark:bg-slate-900 border border-slate-200 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden max-h-[90vh] flex flex-col gap-6"
              >
                 <div className="flex items-center justify-between border-b pb-4">
                    <div className="space-y-1">
-                      <h2 className="text-xl md:text-2xl font-black tracking-tight">
+                      <h2 className="text-xl md:text-2xl font-black tracking-tight text-slate-900 dark:text-slate-100">
                          {selectedExplorerCategory.category}
                       </h2>
-                      <p className="text-xs text-muted-foreground">Select a specific subsection to filter our listed catalog</p>
+                      <p className="text-xs text-slate-500 font-semibold">Select a specific subsection to filter our listed catalog</p>
                    </div>
                    <button 
                      onClick={() => setSelectedExplorerCategory(null)}
-                     className="h-9 w-9 rounded-full border bg-muted/40 flex items-center justify-center hover:bg-muted/80 transition-all"
+                     className="h-9 w-9 rounded-full border border-slate-200 bg-slate-50 flex items-center justify-center hover:bg-slate-100 text-slate-700 transition-all"
                    >
                      <X className="h-4 w-4" />
                    </button>
                 </div>
-
+ 
                 <div className="flex-1 overflow-y-auto pr-2 space-y-6 no-scrollbar">
                    {selectedExplorerCategory.subsections.map((sub: any) => (
                       <div key={sub.title} className="space-y-4">
-                         <h3 className="text-sm font-black text-muted-foreground uppercase tracking-wider">{sub.title}</h3>
+                         <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{sub.title}</h3>
                          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                             {sub.items.map((item: any, itemIndex: number) => (
                                <motion.button
@@ -547,12 +547,12 @@ function ServicesContent() {
                                    setActiveCategory(selectedExplorerCategory.slug);
                                    setSelectedExplorerCategory(null);
                                  }}
-                                 className="group flex flex-col items-center gap-3 p-3 rounded-2xl border bg-muted/20 hover:border-primary/40 hover:bg-primary/5 transition-all text-center h-full justify-between"
+                                 className="group flex flex-col items-center gap-3 p-3 rounded-2xl border border-slate-200 hover:border-primary/45 hover:bg-primary/5 transition-all text-center h-full justify-between"
                                >
-                                  <span className="text-3xl p-2 rounded-xl bg-white dark:bg-slate-800 shadow-sm transition-transform group-hover:scale-110">{item.icon}</span>
+                                  <span className="text-3xl p-2 rounded-xl bg-slate-50 dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-750 transition-transform group-hover:scale-110">{item.icon}</span>
                                   <div className="space-y-0.5">
-                                     <h4 className="text-xs font-bold leading-tight group-hover:text-primary transition-colors line-clamp-2">{item.name}</h4>
-                                     <p className="text-[10px] text-muted-foreground font-medium line-clamp-1">{item.desc}</p>
+                                     <h4 className="text-xs font-black leading-tight text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors line-clamp-2">{item.name}</h4>
+                                     <p className="text-[10px] text-slate-550 dark:text-slate-400 font-semibold line-clamp-1">{item.desc}</p>
                                   </div>
                                </motion.button>
                             ))}
@@ -560,11 +560,11 @@ function ServicesContent() {
                       </div>
                    ))}
                 </div>
-
+ 
                 <div className="flex items-center justify-end pt-4 border-t gap-2 shrink-0">
                    <button 
                      onClick={() => setSelectedExplorerCategory(null)}
-                     className="px-4 py-2 rounded-xl border bg-muted/40 font-bold text-xs hover:bg-muted/80 transition-all"
+                     className="px-4 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 font-bold text-xs text-slate-700 transition-all"
                    >
                      Close
                    </button>
@@ -573,7 +573,7 @@ function ServicesContent() {
                        setActiveCategory(selectedExplorerCategory.slug);
                        setSelectedExplorerCategory(null);
                      }}
-                     className="px-4 py-2 rounded-xl gradient-primary font-bold text-xs text-white shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center gap-1"
+                     className="px-4 py-2 rounded-xl gradient-primary font-bold text-xs text-black shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all flex items-center gap-1"
                    >
                      Explore Sub-category <ChevronRight className="h-3.5 w-3.5" />
                    </button>

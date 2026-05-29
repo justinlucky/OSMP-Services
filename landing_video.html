@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSM Services – Intelligent Services, Delivered Instantly.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+        }
+        h1, h2, h3, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased text-gray-800 bg-[#F9FAFB] selection:bg-blue-500 selection:text-white relative select-none">
+
+    <!-- Soft Ambient Blue Glowing Accents -->
+    <div class="absolute top-0 right-0 w-[45rem] h-[30rem] bg-gradient-to-b from-blue-100/30 via-slate-100/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+    <div class="absolute bottom-0 left-0 w-[30rem] h-[30rem] bg-gradient-to-t from-blue-100/30 via-slate-100/10 to-transparent blur-3xl pointer-events-none -z-10"></div>
+
+    <!-- Top Bar / Navigation -->
+    <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 relative z-40">
+        <nav class="bg-white border border-gray-200 rounded-3xl px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+            <!-- Left: Brand / Logo -->
+            <div class="flex items-center gap-3">
+                <div class="h-9 w-9 rounded-xl bg-gradient-to-tr from-blue-600 to-blue-550 flex items-center justify-center shadow-md shadow-blue-500/10 text-white font-bold text-sm tracking-wider">
+                    OSM
+                </div>
+                <div>
+                    <span class="text-lg font-black tracking-tight text-gray-900">OSM Services</span>
+                </div>
+            </div>
+
+            <!-- Center/Right: Mockup Status Info & Static Indicators -->
+            <div class="flex flex-wrap items-center justify-center md:justify-end gap-3 text-xs">
+                <!-- Weather widget -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-[10px] font-bold text-gray-800">
+                    <i class="fa-solid fa-cloud-sun text-blue-500"></i>
+                    29°C Mostly sunny
+                </div>
+
+                <!-- Language selector -->
+                <div class="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-gray-100 border border-gray-200 text-[10px] font-bold text-gray-700">
+                    <span>ENG / US</span>
+                </div>
+
+                <!-- Live Status bar info -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-[10px] font-bold text-gray-700 font-mono">
+                    <span id="header-time">09:02 AM</span>
+                    <span>•</span>
+                    <span>26-05-2026</span>
+                    <span>•</span>
+                    <i class="fa-solid fa-battery-three-quarters text-emerald-500"></i>
+                    <i class="fa-solid fa-signal text-blue-500"></i>
+                </div>
+
+                <!-- Search icon toggle -->
+                <button onclick="alert('Search feature coming soon')" class="p-2 text-gray-700 hover:text-blue-600 border border-gray-200 hover:border-blue-200 rounded-xl bg-white shadow-sm transition-all duration-200">
+                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Hero & Site Sections -->
+    <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 flex flex-col justify-center gap-10">
+        
+        <!-- Hero Columns (Desktop 2cols, Mobile stack) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Column: Content -->
+            <div class="lg:col-span-7 space-y-8">
+                <!-- Live Announcement Badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-xs font-bold text-blue-700 tracking-wide animate-pulse">
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+                    </span>
+                    OSM AI 2.0 is now live
+                </div>
+
+                <!-- Headline & Subheadline Description -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl sm:text-5xl lg:text-[4.7rem] font-black tracking-tight leading-[1.05] text-gray-900">
+                        Intelligent Services,<br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-[#2563EB] font-extrabold">Delivered Instantly.</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-600 font-medium leading-relaxed max-w-xl">
+                        Experience the world's most advanced service platform. AI-driven matching, real-time tracking, and enterprise-grade reliability for your business and home.
+                    </p>
+                </div>
+
+                <!-- AI Command Palette / Prompt Area -->
+                <div class="w-full max-w-2xl bg-white border border-gray-300 rounded-2xl sm:rounded-full p-2.5 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 transition-all flex flex-col sm:flex-row items-center gap-3">
+                    <div class="flex items-center gap-3 pl-4 flex-1 w-full">
+                        <i class="fa-solid fa-message-bot text-blue-600 text-base"></i>
+                        <span class="text-xs font-bold text-blue-600 uppercase tracking-widest shrink-0">Ask AI:</span>
+                        <input 
+                            type="text" 
+                            id="ai-prompt"
+                            placeholder="Ask AI: ‘I need an IT audit for my startup…’" 
+                            class="bg-transparent text-indigo-900 placeholder-indigo-700 text-sm sm:text-base outline-none font-medium w-full"
+                            onkeypress="handleAIPrompt(event)"
+                        />
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+                        <span class="hidden sm:inline-flex items-center gap-0.5 px-2.5 py-1 rounded bg-gray-100 border border-gray-200 font-mono text-[9px] font-bold text-gray-700 select-none">
+                            ⌘ K
+                        </span>
+                        <button onclick="triggerAI()" class="w-full sm:w-auto h-11 px-6 rounded-xl sm:rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm tracking-wide shadow-sm hover:shadow active:scale-[0.98] transition-all duration-200">
+                            Generate
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Service Chips / Tags -->
+                <div class="flex flex-wrap gap-2.5 items-center">
+                    <span class="text-xs font-bold text-gray-700 uppercase tracking-widest mr-1">Trending:</span>
+                    <button onclick="clickChip('Corporate Cleaning')" class="px-4 py-2.5 text-xs font-bold text-gray-800 bg-gray-100 hover:bg-gray-200 hover:scale-102 border border-gray-200 rounded-xl transition-all duration-200 active:scale-95 shadow-sm">
+                        Corporate Cleaning
+                    </button>
+                    <button onclick="clickChip('IT Infrastructure')" class="px-4 py-2.5 text-xs font-bold text-gray-800 bg-gray-100 hover:bg-gray-200 hover:scale-102 border border-gray-200 rounded-xl transition-all duration-200 active:scale-95 shadow-sm">
+                        IT Infrastructure
+                    </button>
+                    <button onclick="clickChip('Security Audit')" class="px-4 py-2.5 text-xs font-bold text-gray-800 bg-gray-100 hover:bg-gray-200 hover:scale-102 border border-gray-200 rounded-xl transition-all duration-200 active:scale-95 shadow-sm">
+                        Security Audit
+                    </button>
+                    <button onclick="clickChip('Office Setup')" class="px-4 py-2.5 text-xs font-bold text-gray-800 bg-gray-100 hover:bg-gray-200 hover:scale-102 border border-gray-200 rounded-xl transition-all duration-200 active:scale-95 shadow-sm">
+                        Office Setup
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Column: Visual Showcase -->
+            <div class="lg:col-span-5 relative w-full aspect-[4/5] sm:aspect-video lg:aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-200 bg-white">
+                <!-- Autoplay Background Video -->
+                <video 
+                    id="hero-video"
+                    autoplay 
+                    loop 
+                    muted 
+                    playsinline 
+                    preload="metadata"
+                    class="absolute inset-0 w-full h-full object-cover opacity-90 transition-opacity duration-700"
+                    poster="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&q=80&w=2070"
+                >
+                    <source src="https://cdn.pixabay.com/video/2022/02/05/106458-669759263_large.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <!-- Soft visual overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none"></div>
+
+                <!-- Live Status overlay badge -->
+                <div class="absolute top-6 left-6 bg-white/95 backdrop-blur-md border border-gray-200 rounded-2xl flex items-center gap-2 px-3 py-2 shadow-md">
+                    <span class="relative flex h-1.5 w-1.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600"></span>
+                    </span>
+                    <span class="text-[9px] font-black uppercase tracking-wider text-gray-700 font-mono">Live Demo: Deep Cleaning</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Premium Service Banner Section -->
+        <div class="bg-blue-50 border border-blue-100 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+            <div class="space-y-1.5">
+                <span class="text-[10px] font-black uppercase tracking-widest text-blue-600 block font-mono">PREMIUM SERVICE</span>
+                <h3 class="text-xl md:text-2xl font-black text-blue-900 leading-tight">DEEP CLEANING & SANITATION</h3>
+                <p class="text-xs md:text-sm text-blue-700/80 font-medium">Hygienic workspace audits, specialized anti-bacterial fogging, and premium detailing for commercial & domestic setups.</p>
+            </div>
+            <button onclick="alert('Premium Service Booking initiated!')" class="px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow transition-all duration-200 active:scale-95 shrink-0">
+                Book Premium Now
+            </button>
+        </div>
+
+        <!-- Trust Badges Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto w-full">
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm hover:shadow transition-shadow">
+                <div class="h-10 w-10 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-blue-600 shadow-inner">
+                    <i class="fa-solid fa-cloud text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-gray-900">99.9% Uptime Guarantee</h4>
+                    <p class="text-[11px] text-gray-600 font-medium">Always online dynamic scheduling systems.</p>
+                </div>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-4 shadow-sm hover:shadow transition-shadow">
+                <div class="h-10 w-10 bg-blue-50 border border-blue-100 rounded-xl flex items-center justify-center text-blue-600 shadow-inner">
+                    <i class="fa-solid fa-headset text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-gray-900">24/7 AI Support Center</h4>
+                    <p class="text-[11px] text-gray-600 font-medium">Instant automated service routing & billing.</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs font-semibold text-gray-600">
+            © 2026 OSM Services Inc. All rights reserved.
+        </p>
+        <div class="flex items-center gap-4 text-xs font-bold text-gray-600 font-mono tracking-wider">
+            <span>29°C</span>
+            <span>•</span>
+            <span>ENG</span>
+            <span>•</span>
+            <span id="footer-time">09:02 AM</span>
+        </div>
+    </footer>
+
+    <!-- Interactive script behaviors -->
+    <script>
+        // Trigger alerts for interactive components
+        function handleSearch(e) {
+            if (e.key === 'Enter') {
+                alert(`Search performed: "${e.target.value}"\nIntegrated search is coming soon!`);
+                e.target.value = "";
+            }
+        }
+
+        function handleAIPrompt(e) {
+            if (e.key === 'Enter') {
+                triggerAI();
+            }
+        }
+
+        function triggerAI() {
+            const input = document.getElementById("ai-prompt");
+            const val = input.value.trim();
+            if (val) {
+                alert(`AI search triggered for: ${val}`);
+                input.value = "";
+            } else {
+                alert(`Please enter a prompt (e.g. 'I need an IT audit for my startup')`);
+            }
+        }
+
+        // Live Clock Sync
+        document.addEventListener("DOMContentLoaded", () => {
+            const syncClock = () => {
+                const now = new Date();
+                let hours = now.getHours();
+                let minutes = now.getMinutes();
+                const ampm = hours >= 12 ? 'PM' : 'AM';
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                
+                const timeStr = hours + ':' + minutes + ' ' + ampm;
+                
+                const footerTime = document.getElementById("footer-time");
+                const headerTime = document.getElementById("header-time");
+                if (footerTime) footerTime.innerText = timeStr;
+                if (headerTime) headerTime.innerText = timeStr;
+            };
+            syncClock();
+            setInterval(syncClock, 15000);
+        });
+
+        function clickChip(serviceName) {
+            alert(`You selected ${serviceName}`);
+        }
+    </script>
+</body>
+</html>
