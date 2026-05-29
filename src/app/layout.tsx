@@ -6,6 +6,7 @@ import { Footer } from "@/components/shared/Footer";
 import { BottomNav } from "@/components/shared/BottomNav";
 import { Toaster } from "@/components/ui/sonner";
 import { FloatingChatbot } from "@/components/shared/FloatingChatbot";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
 const outfit = Outfit({ subsets: ["latin"], variable: '--font-outfit' });
@@ -23,16 +24,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${inter.variable} ${outfit.variable} font-sans min-h-full flex flex-col bg-background text-foreground antialiased`}>
-        <Navbar />
-        <main className="flex-1 pb-16 md:pb-0">
-          {children}
-        </main>
-        <Footer />
-        <BottomNav />
-        <Toaster />
-        
-        {/* Interactive Floating Chat Support & Conversational Engine */}
-        <FloatingChatbot />
+        <ClerkProvider>
+          <Navbar />
+          <main className="flex-1 pb-16 md:pb-0">
+            {children}
+          </main>
+          <Footer />
+          <BottomNav />
+          <Toaster />
+
+          {/* Interactive Floating Chat Support & Conversational Engine */}
+          <FloatingChatbot />
+        </ClerkProvider>
       </body>
     </html>
   );
