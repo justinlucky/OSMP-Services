@@ -3,7 +3,6 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/shared/Navbar";
 import { Footer } from "@/components/shared/Footer";
-import { BottomNav } from "@/components/shared/BottomNav";
 import { Toaster } from "@/components/ui/sonner";
 import { FloatingChatbot } from "@/components/shared/FloatingChatbot";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -30,7 +29,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <BottomNav />
           <Toaster />
 
           {/* Interactive Floating Chat Support & Conversational Engine */}
